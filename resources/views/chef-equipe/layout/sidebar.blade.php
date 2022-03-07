@@ -25,37 +25,12 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{ route('admin.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
+                  <li><a href="{{ route('chef.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
                    <li><a><i class="fa fa-edit"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ route('projets.index') }}">Projets</a></li>
-                      <li><a href="{{ route('taches.index') }}">Tâches</a></li>
-                      <li><a href="{{ route('personnel.presence') }}">Fiche de temps</a></li>
-                      <li><a href="{{ route('equipes.create') }}">Equipes</a></li>
-                      <li><a href="{{ route('equipe.chef') }}">Chefs d'équipes</a></li>
-                    </ul>
-                  </li>
-                   <li><a><i class="fa fa-edit"></i> Empêchements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="#">voir les empêchements</a></li>
-                      <li><a href="#">détails des empêchements</a></li>
-                    </ul>
-                  </li>
-                   <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="#">liste des clients</a></li>
-                      <li><a href="#">profil des clients</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Employés <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="#">liste des employés</a></li>
-                      <li><a href="#">profil des employé</a></li>
-                      <li><a href="#">congés</a></li>
-                      <li><a href="#">Présences</a></li>
-                      <li><a href="#">historiques des connexions</a></li>
-                      <li><a href="#">Justification absences</a></li>
-                      <li><a href="#">Departements</a></li>
+                      <li><a href="{{ route('equipe.projet') }}">Projets</a></li>
+                      <li><a href="{{ route('equipe.tache') }}">Tâches</a></li>
+                      <li><a href="{{ route('equipe.membre') }}">Equipe</a></li>
                     </ul>
                   </li>
                    <li><a><i class="fa fa-edit"></i> Evénements <span class="fa fa-chevron-down"></span></a>

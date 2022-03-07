@@ -5,10 +5,10 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        @include('admin.layout.sidebar')
+        @include('chef-equipe.layout.sidebar')
 
         <!-- top navigation -->
-        @include('admin.layout.navbar')
+        @include('chef-equipe.layout.navbar')
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -38,44 +38,36 @@
                             @csrf
                             <br>
                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Projet</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select name="projet_id" class="form-control">Choisissez le projet</option>
-                                    <option value="">RH SYSTEM </option>
-                                </select>
-                                </div>
-                            </div>
-                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Libellé de la tâche</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="libelle" class="form-control" placeholder="Libellé de la tâche">
+                                    <input type="text" class="form-control" placeholder="Libellé de la tâche">
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Durée</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="duree" class="form-control" placeholder="Durée">
+                                    <input type="text" class="form-control" placeholder="Durée">
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Exécutant</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select name="executand_id" class="form-control">
+                                <select class="form-control">
                                     <option value="">Choisissez quelqu'un</option>
                                     <option value="">Arouna </option>
                                     <option value="">Nouria </option>
                                 </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Etat</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                            <select name="etat" class="form-control">
-                                <option value="pas_fait">Pas fait</option>
-                                <option value="en_cours">En cours </option>
-                                <option value="fait">Fait </option>
-                            </select>
-                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Etat</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select class="form-control">
+                                    <option value="">Pas fait</option>
+                                    <option value="">En cours </option>
+                                    <option value="">Fait </option>
+                                </select>
+                                </div>
                             </div>
 
                             <br>
@@ -96,7 +88,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Projet <small>Voir les têches</small></h2>
+                    <h2>Projet <small>Voir les tâches</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -141,35 +133,19 @@
                         </thead>
 
                         <tbody>
-                            @if ($projets->count())
-                                @if ($taches->count())
-                                    @foreach ($taches as $tache)
-                                        <tr class="even pointer">
-                                            <td class="a-center ">
-                                            <input type="checkbox" class="flat" name="table_records">
-                                            </td>
-                                            <td class=" ">RH SYSTEM</td>
-                                            <td class=" ">02 Mars 2021 </td>
-                                            <td class=" ">7 mois </td>
-                                            <td class=" ">2 </td>
-                                            <td class=" ">Sidick</td>
-                                            <td class=" ">En cours</td>
-                                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td style="text-align: center" colspan="9">Pas de taches en cours</td>
-                                    </tr>
-                                @endif
-                            @else
-                            <tr>
-                                <td style="text-align: center" colspan="9">Pas de projet en cours</td>
-                            </tr>
-
-                            @endif
-
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">RH SYSTEM</td>
+                            <td class=" ">02 Mars 2021 </td>
+                            <td class=" ">7 mois </td>
+                            <td class=" ">2 </td>
+                            <td class=" ">Sidick</td>
+                            <td class=" ">En cours</td>
+                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir</a>
+                            </td>
+                          </tr>
 
                         </tbody>
                       </table>
@@ -201,7 +177,7 @@
                           <td>Compléter dashbord</td>
                           <td>Arouna</td>
                           <td>2 h</td>
-                          <th>Pas fait</th>
+                          <td>Pas fait</td>
                         </tr>
                       </tbody>
                     </table>

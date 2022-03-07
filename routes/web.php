@@ -1,6 +1,13 @@
 <?php
 
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\MembreController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\TacheController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +21,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+Route::get('/admin_dashboard', [DashboardController::class, 'dashbord_admin'])->name('admin.dashbord');
+Route::get('/chef-equipe', [DashboardController::class, 'dashbord_chef'])->name('chef.dashbord');
+Route::get('/user', [DashboardController::class, 'dashbord_user'])->name('user.dashbord');
 
-Route::get('/login', [AuthController::class, 'login'])->name('user.login');
+Route::get('/', [AuthController::class, 'login'])->name('user.login');
 Route::post('/login', [AuthController::class, 'dologin'])->name('user.doLog');
 Route::post('/register', [AuthController::class, 'doregister'])->name('user.doReg');
+Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
+Route::get('/lock', [AuthController::class, 'lock'])->name('user.lock');
+Route::post('/unlock', [AuthController::class, 'unlock'])->name('user.unlock');
+
+Route::get('/parametre', [AuthController::class, 'parametre'])->name('user.setting');
+Route::post('/parametre', [AuthController::class, 'storeParametre'])->name('user.doSetting');
+
+Route::resource('/projets', ProjetController::class);
+Route::resource('/taches', TacheController::class);
+Route::resource('/message', MessageController::class);
+Route::resource('/equipes', EquipeController::class);
+Route::resource('/membre', MembreController::class);
+Route::get('/projet/{projet}/suppression', [ProjetController::class, 'destroy'])->name('projet.destroy');
+Route::get('/equipe/chef', [EquipeController::class, 'chef'])->name('equipe.chef');
+Route::get('/equipe/projet', [EquipeController::class, 'projet'])->name('equipe.projet');
+Route::get('/equipe/tache', [EquipeController::class, 'tache'])->name('equipe.tache');
+Route::get('/equipe/membre', [EquipeController::class, 'membre'])->name('equipe.membre');
+
+Route::get('/personnel/presence', [PersonnelController::class, 'presence'])->name('personnel.presence');
 
 

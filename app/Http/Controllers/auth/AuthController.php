@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,11 +18,89 @@ class AuthController extends Controller
 
     public function dologin(Request $request)
     {
-        dd('ok');
+        $this->validate($request, [
+            'email' => 'required|email',
+            'mdp' => 'required',
+        ]);
+
+        if (Auth::attempt(auth()->attempt(array('email' => $request['email'], 'mdp' => $request['mdp'])))) {
+
+            // SI L'UTILISATEUR A UN COMPTE
+            $request->session()->regenerate();
+            if (auth()->user()->user_type == 'admin') {
+                return redirect()->route('admin.dashbord')->with('message', 'Connexion réussie.');
+            }
+            if (auth()->user()->user_type == 'chef') {
+                return redirect()->route('chef.dashbord')->with('message', 'Connexion réussie.');
+            }
+            else {
+                return redirect()->route('user.dashbord')->with('message', 'Connexion réussie.');
+            }
+
+        } else {
+            return redirect()->back()->with('message', 'Erreur.');
+        }
+
+
     }
 
     public function doregister(Request $request)
     {
-        dd('ok');
+        $this->validate($request, [
+            'nom_prenom' => 'required|string',
+            'nom_utilisateur' => 'required|string',
+            'genre' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'mdp' => 'required|confirmed',
+        ]);
+
+        User::create([
+            'nom_prenom' => $request->nom_prenom,
+            'nom_utilisateur' => $request->nom_utilisateur,
+            'genre' => $request->genre,
+            'email' => $request->email,
+            'mdp' => Hash::make($request->mdp),
+        ]);
+
+        if (Auth::attempt(array('email' => $request['email'], 'mdp' => $request['mdp']))) {
+            return redirect()->route('user.dashbord')->with('message', 'Connexion réussie.');
+        } else {
+            # code...
+        }
+
+
+    }
+
+    public function logout()
+    {
+        if(Auth::user()){
+            Auth::logout();
+            return redirect()->route('user.login');
+        }else {
+            return redirect()->route('user.login');
+        }
+    }
+
+    public function lock()
+    {
+        // METTRE LA PAGE DE VERROUILLAGE ICI
+        $title = "PAGE BLOQUEE";
+        return view('auth.lock', compact('title'));
+    }
+
+    public function unlock(Request $request)
+    {
+        // METTRE LE CODE DE DEVERROUILLAGE ICI
+        dd('Mot de passe incorrect');
+    }
+
+    public function parametre()
+    {
+        # code...
+    }
+
+    public function storeParametre(Request $request)
+    {
+        # code...
     }
 }

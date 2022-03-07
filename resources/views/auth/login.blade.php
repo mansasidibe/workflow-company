@@ -34,13 +34,13 @@
             @csrf
               <h1>Connexion</h1>
               <div>
-                <input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur" required="" />
+                <input type="text" name="email" class="form-control" placeholder="email" required="" />
               </div>
               <div>
                 <input type="password" name="mdp" class="form-control" placeholder="Mot de passe" required="" />
               </div>
               <div>
-                    <a class="btn btn-default submit">Connexion</a>
+                    <button type="submit" class="btn btn-default submit">Connexion</button>
 
                 <a class="reset_pass" href="#">Mot de passe oublié?</a>
               </div>
@@ -66,15 +66,27 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form method="POST" action="{{ route('user.doReg') }}">
                  @csrf
               <h1>Création de compte</h1>
               <div>
-                <input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur" required="" />
+                <input type="text" value="{{ old('nom_prenom') }}" name="nom_prenom" class="form-control" placeholder="Nom & prénom" required="" />
+              </div>
+               <div>
+                <input type="text" value="{{ old('nom_utilisateur') }}" name="nom_utilisateur" class="form-control" placeholder="Nom d'utilisateur" required="" />
               </div>
               <div>
-                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
+                <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email" required="" />
               </div>
+
+               <div>
+                <select name="genre" class="form-control">
+                    <option value="H">Homme </option>
+                    <option value="F">Femme </option>
+                </select>
+              </div>
+              <br/>
+
               <div>
                 <input type="password" name="mdp" class="form-control" placeholder="Mot de passe" required="" />
               </div>
@@ -82,7 +94,7 @@
                 <input type="password" name="mdp_confirmation" class="form-control" placeholder="Confirmation" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="#">Soumettre</a>
+                <button type="submit" class="btn btn-default submit">S'inscrire</button>
               </div>
 
               <div class="clearfix"></div>
