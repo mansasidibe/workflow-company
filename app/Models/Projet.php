@@ -15,5 +15,6 @@ class Projet extends Model
         'duree',
         'equipe_id',
         'etat',
+        'user_id'
     ];
 }

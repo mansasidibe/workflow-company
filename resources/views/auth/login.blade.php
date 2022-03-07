@@ -37,7 +37,7 @@
                 <input type="text" name="email" class="form-control" placeholder="email" required="" />
               </div>
               <div>
-                <input type="password" name="mdp" class="form-control" placeholder="Mot de passe" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="" />
               </div>
               <div>
                     <button type="submit" class="btn btn-default submit">Connexion</button>
@@ -88,10 +88,10 @@
               <br/>
 
               <div>
-                <input type="password" name="mdp" class="form-control" placeholder="Mot de passe" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="" />
               </div>
               <div>
-                <input type="password" name="mdp_confirmation" class="form-control" placeholder="Confirmation" required="" />
+                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirmation" required="" />
               </div>
               <div>
                 <button type="submit" class="btn btn-default submit">S'inscrire</button>

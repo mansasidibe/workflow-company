@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Message;
 use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class DashboardController extends Controller
         $users_homme = User::where('genre', 'H')->get();
         $users_femme = User::where('genre', 'F')->get();
         $equipes = Equipe::get();
-        return view('admin.dashboard', compact('title', 'users','users_homme', 'users_femme','equipes'));
+        $messages = Message::get();
+        return view('admin.dashboard', compact('title', 'messages', 'users','users_homme', 'users_femme','equipes'));
     }
 
     public function dashbord_chef()
@@ -31,8 +33,7 @@ class DashboardController extends Controller
 
     public function dashbord_user()
     {
-        // dd(Auth::user());
-         $title = "DASHBOARD EMPLOYE";
+        $title = "DASHBOARD EMPLOYE";
         $equipes = Equipe::get();
         $taches = Tache::get();
         return view('user.dashboard', compact('title', 'taches','equipes'));

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\MembreController;
@@ -26,8 +28,8 @@ Route::get('/chef-equipe', [DashboardController::class, 'dashbord_chef'])->name(
 Route::get('/user', [DashboardController::class, 'dashbord_user'])->name('user.dashbord');
 
 Route::get('/', [AuthController::class, 'login'])->name('user.login');
-Route::post('/login', [AuthController::class, 'dologin'])->name('user.doLog');
-Route::post('/register', [AuthController::class, 'doregister'])->name('user.doReg');
+Route::post('/', [LoginController::class, 'dologin'])->name('user.doLog');
+Route::post('/regist', [RegisterController::class, 'doregister'])->name('user.doReg');
 Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
 Route::get('/lock', [AuthController::class, 'lock'])->name('user.lock');
 Route::post('/unlock', [AuthController::class, 'unlock'])->name('user.unlock');
@@ -48,4 +50,6 @@ Route::get('/equipe/membre', [EquipeController::class, 'membre'])->name('equipe.
 
 Route::get('/personnel/presence', [PersonnelController::class, 'presence'])->name('personnel.presence');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

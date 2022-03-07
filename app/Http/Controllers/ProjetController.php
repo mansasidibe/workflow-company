@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Equipe;
 use App\Models\Projet;
 use App\Models\Tache;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjetController extends Controller
 {
@@ -21,6 +23,8 @@ class ProjetController extends Controller
         $projets = Projet::get();
         $taches = Tache::get();
         $equipes = Equipe::get();
+        Carbon::setLocale('fr');
+
         return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes'));
     }
 
@@ -51,8 +55,15 @@ class ProjetController extends Controller
             'duree' => '',
             'equipe_id' => '',
         ]);
+        $projet = new Projet();
 
-        Projet::create($donnee);
+        $projet->nom = $request->input('nom');
+        $projet->date_debut = $request->input('date_debut');
+        $projet->duree = $request->input('duree');
+        $projet->equipe_id = $request->input('equipe_id');
+        $projet->etat = $request->input('etat');
+        // $projet->user_id = Auth()->user()->id;
+        $projet->save();
 
         return redirect()->back()->with('message', 'Projet ajouté avec succès');
     }
@@ -91,6 +102,23 @@ class ProjetController extends Controller
     public function update(Request $request, Projet $projet)
     {
         //
+         $donnee = $this->validate($request, [
+            'nom' => '',
+            'date_debut' => '',
+            'duree' => '',
+            'equipe_id' => '',
+            'etat'  => '',
+        ]);
+
+        $projet->nom = $request->input('nom');
+        $projet->date_debut = $request->input('date_debut');
+        $projet->duree = $request->input('duree');
+        $projet->equipe_id = $request->input('equipe_id');
+        $projet->etat = $request->input('etat');
+        // $projet->user_id = Auth()->user()->id;
+        $projet->update();
+
+        return redirect()->back()->with('message', 'Projet mis à jour avec succès!');
     }
 
     /**
@@ -104,6 +132,6 @@ class ProjetController extends Controller
         //
         // dd($projet);
         $projet->delete();
-        return redirect()->back()->with('message', 'Projet archivé avec succès');
+        return response()->json(['message' => 'Projet archivé avec succès']);
     }
 }

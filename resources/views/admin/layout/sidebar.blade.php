@@ -13,7 +13,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2>Arouna SIDIBE</h2>
+                <h2>@auth {{ auth()->user()->nom_prenom }} @endauth @guest Personne @endguest</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->

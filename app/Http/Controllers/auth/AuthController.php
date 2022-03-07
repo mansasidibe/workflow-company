@@ -16,33 +16,6 @@ class AuthController extends Controller
         return view('auth.login', compact('title'));
     }
 
-    public function dologin(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'mdp' => 'required',
-        ]);
-
-        if (Auth::attempt(auth()->attempt(array('email' => $request['email'], 'mdp' => $request['mdp'])))) {
-
-            // SI L'UTILISATEUR A UN COMPTE
-            $request->session()->regenerate();
-            if (auth()->user()->user_type == 'admin') {
-                return redirect()->route('admin.dashbord')->with('message', 'Connexion réussie.');
-            }
-            if (auth()->user()->user_type == 'chef') {
-                return redirect()->route('chef.dashbord')->with('message', 'Connexion réussie.');
-            }
-            else {
-                return redirect()->route('user.dashbord')->with('message', 'Connexion réussie.');
-            }
-
-        } else {
-            return redirect()->back()->with('message', 'Erreur.');
-        }
-
-
-    }
 
     public function doregister(Request $request)
     {
@@ -62,10 +35,10 @@ class AuthController extends Controller
             'mdp' => Hash::make($request->mdp),
         ]);
 
-        if (Auth::attempt(array('email' => $request['email'], 'mdp' => $request['mdp']))) {
+        if (Auth::attempt(['email' => $request->email, 'mdp' => $request->mdp])) {
             return redirect()->route('user.dashbord')->with('message', 'Connexion réussie.');
         } else {
-            # code...
+            dd('non');
         }
 
 

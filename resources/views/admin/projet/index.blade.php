@@ -127,11 +127,14 @@
                             @foreach ($projets as $projet)
 
                         <tr>
+                            <input type="hidden" class="btn-suppres" value="{{ $projet->id }}">
                           <td>#</td>
                           <td>
                             <a>{{ $projet->nom }}</a>
                             <br />
                             <small>Créé le {{ $projet->created_at }}</small>
+                            <br />
+                            <small>Modifié : {{ $projet->updated_at->diffForHumans() }}</small>
                           </td>
                           <td> {{ $projet->duree }} </td>
                           <td class="project_progress">
@@ -141,12 +144,18 @@
                             <small>0% Completé</small>
                           </td>
                           <td>
-                            <button type="button" class="btn btn-success btn-xs">Début</button>
+                            @if ( $projet->etat == "encours")
+                                <button type="button" class="btn btn-warning btn-xs">En cours</button>
+                            @elseif ( $projet->etat == "termine")
+                                <button type="button" class="btn btn-success btn-xs">Terminé</button>
+                            @else
+                                <button type="button" class="btn btn-danger btn-xs">Début</button>
+                            @endif
                           </td>
                           <td>
                             <a href="{{ route('projets.update', $projet->id ) }}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
                             <a data-toggle="modal" data-target=".bs3-example-modal-lg" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edite </a>
-                            <a href="{{ route('projet.destroy', $projet->id ) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Archiver </a>
+                            <a href="{{ route('projet.destroy', $projet->id ) }}" class="btn btn-danger btn-xs supress"><i class="fa fa-trash-o"></i> Archiver </a>
                           </td>
                         </tr>
 
@@ -156,7 +165,8 @@
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
-                        <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('projets.store') }}">
+                        <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('projets.update', $projet->id) }}">
+                            @method('PUT')
                             @csrf
                             <br>
                              <div class="form-group">
@@ -195,7 +205,7 @@
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Assigner une équipe</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select name="equipe_id" class="form-control">
+                                <select name="etat" class="form-control">
                                     <option value="debut">Début</option>
                                     <option value="encours">En cours</option>
                                     <option value="termine">Terminé</option>
@@ -255,6 +265,56 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
   </body>
+
+  <script>
+      $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+          $('.supress').click(function (e) {
+            e.preventDefault();
+
+            var element_id = $(this).closest('tr').find('.btn-suppres').val();
+
+                swal({
+                    title: "Etes-vous sûr d'effectuer cette opération ?",
+                    text: "Cette action est irréversible!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        var data = {
+                            "_token": $('input[name="_token"]').val(),
+                            "id": element_id,
+                        };
+
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/projets/'+element_id,
+                            data: data,
+                            success: function (response) {
+                                swal(response.message, {
+                                    icon: "success",
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        });
+
+                    } else {
+                        swal("Action annulée!");
+                    }
+            });
+          })
+      })
+  </script>
 
 
 @endsection

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'genre',
         'type_utilisateur',
         'email',
-        'mdp',
+        'password',
         'photo',
     ];
 
