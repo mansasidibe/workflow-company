@@ -14,9 +14,13 @@ class Membre extends Model
         'equipe_id'
     ];
 
-
     public function equipe()
     {
         return $this->belongsTo(Equipe::class);
+    }
+
+    public function taches()
+    {
+        return $this->hasMany(Tache::class);
     }
 }

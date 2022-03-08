@@ -41,6 +41,8 @@ class MembreController extends Controller
             'equipe_id' => ''
         ]);
 
+        // dd($donnee);
+
         Membre::create($donnee);
 
         return redirect()->back()->with('message', 'le memebre à bien été ajouté');
@@ -78,6 +80,7 @@ class MembreController extends Controller
     public function update(Request $request, Membre $membre)
     {
         //
+        dd('ici');
     }
 
     /**

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->unsignedBigInteger('equipe_id')->index();
+            // $table->unsignedBigInteger('tache_id')->index();
             $table->timestamps();
         });
     }

@@ -78,7 +78,7 @@
 
                       </div>
                     </div>
-                  </div>
+            </div>
 
             {{-- fin model --}}
 
@@ -161,7 +161,7 @@
 
                         {{-- modal ici --}}
 
-            <div class="modal fade bs3-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade bs3-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 

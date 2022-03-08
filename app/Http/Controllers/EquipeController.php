@@ -40,7 +40,8 @@ class EquipeController extends Controller
     public function membre()
     {
         $title = "TACHES";
-        return view('chef-equipe.equipe.list', compact('title'));
+        $equipes_chef = Equipe::get();
+        return view('chef-equipe.equipe.list', compact('title', 'equipes_chef'));
     }
 
     /**
@@ -72,7 +73,11 @@ class EquipeController extends Controller
             'chef' => 'required|string',
         ]);
 
-        Equipe::create($donnee);
+        Equipe::create([
+            'nom' => $request->nom,
+            'chef' => $request->chef,
+            'membre_id' => $request->membre_id,
+        ]);
 
         return redirect()->back()->with('message', 'Equipe ajoutée avec succès');
     }
@@ -109,6 +114,11 @@ class EquipeController extends Controller
     public function update(Request $request, Equipe $equipe)
     {
         //
+        $donnee = $this->validate($request, [
+            'nom' => 'required|string',
+            'equipe_id' => 'required|string',
+        ]);
+        dd($donnee);
     }
 
     /**
@@ -120,5 +130,7 @@ class EquipeController extends Controller
     public function destroy(Equipe $equipe)
     {
         //
+        $equipe->delete();
+        return response()->json(['message' => 'Equipe archivée avec succès']);
     }
 }

@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('taches', function (Blueprint $table) {
             $table->id();
+            $table->string('libelle');
+            $table->string('duree');
+            $table->string('etat');
+            $table->string('projet_id');
+            $table->string('executand_id');
+            $table->unsignedBigInteger('equipe_id')->index();
             $table->timestamps();
         });
     }

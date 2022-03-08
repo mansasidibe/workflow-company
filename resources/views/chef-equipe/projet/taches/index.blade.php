@@ -19,13 +19,18 @@
                 <h3>Tâches <small>par équipes</small></h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ajouter une nouvelle tâche</button>
-                  </div>
+              @if (auth()->user()->type_utilisateur == 'chef' || auth()->user()->type_utilisateur == 'admin')
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ajouter une nouvelle tâche</button>
+                    </div>
+                    </div>
                 </div>
-              </div>
+              @else
+
+              @endif
+
             </div>
 
              {{-- modal ici --}}

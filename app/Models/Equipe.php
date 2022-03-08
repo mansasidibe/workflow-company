@@ -12,11 +12,17 @@ class Equipe extends Model
     protected $fillable = [
         'nom',
         'chef',
-        // 'membre_id',
+        'projet_id',
+        'membre_id',
     ];
 
     public function membres()
     {
         return $this->hasMany(Membre::class);
+    }
+
+    public function projets()
+    {
+        return $this->hasMany(Projet::class);
     }
 }

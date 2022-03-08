@@ -17,4 +17,9 @@ class Projet extends Model
         'etat',
         'user_id'
     ];
+
+    public function equipe()
+    {
+        return $this->belongsTo(Equipe::class);
+    }
 }

@@ -37,7 +37,7 @@
                     <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('equipes.store') }}">
                         @csrf
                         <br>
-                            <div class="form-group">
+                        <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom de l'équipe</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <input type="text" name="nom" class="form-control" placeholder="Nom de l'équipe">
@@ -50,6 +50,7 @@
                                 @if ($users->count())
                                     @foreach ($users as $user)
                                         <option value="{{ $user->nom_prenom }}">{{ $user->nom_prenom }}</option>
+                                        <input type="hidden" value="{{ $user->id }}" name="membre_id">
                                     @endforeach
                                 @else
                                     <option>Pas d'utilisateur</option>
@@ -162,19 +163,20 @@
                           @if ($equipes->count())
                             @foreach ($equipes as $equipe)
                         <tr>
+                            <input type="hidden" class="btn-suppres" value="{{ $equipe->id }}">
                             <td>#</td>
                             <td>
                                 <a>{{ $equipe->nom }}</a>
                                 <br />
                                 <small>{{ $equipe->created_at }}</small>
                             </td>
-                            <td>3</td>
+                            <td>{{ $equipe->membres->count() }}</td>
 
-                            <td> Arouna </td>
-                            <td>
-                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
-                                <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edite </a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Archiver </a>
+                            <td> {{ $equipe->chef }} </td>
+                             <td>
+                                <a href="{{ route('taches.update', $equipe->id ) }}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
+                                <a data-toggle="modal" data-target=".bs3-example-modal-lg" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edite </a>
+                                <a href="{{ route('taches.destroy', $equipe->id ) }}" class="btn btn-danger btn-xs supress"><i class="fa fa-trash-o"></i> Archiver </a>
                             </td>
                             </tr>
                             @endforeach
@@ -187,6 +189,55 @@
 
                       </tbody>
                     </table>
+
+                    {{-- modal ici --}}
+
+                    <div class="modal fade bs3-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('equipes.update', $equipe->id ) }}">
+                                @method('PUT')
+                            @csrf
+                            <br>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom du membre</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                     <select name="nom" class="form-control">
+                                        @if ($users->count())
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->nom_prenom }}">{{ $user->nom_prenom }}</option>
+                                            @endforeach
+                                        @else
+                                            <option>Pas d'utilisateur</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Assigner une équipe</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select name="equipe_id" class="form-control">
+                                @if ($equipes->count())
+                                    @foreach ($equipes as $equipe)
+                                        <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
+                                    @endforeach
+                                @else
+                                    <option>Pas d'équipe</option>
+                                @endif
+                                </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </form>
+                            </div>
+                            </div>
+                    </div>
+                    {{-- fin model --}}
+
                     <!-- end project list -->
 
                   </div>
@@ -216,6 +267,57 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
   </body>
+
+
+  <script>
+      $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+          $('.supress').click(function (e) {
+            e.preventDefault();
+
+            var element_id = $(this).closest('tr').find('.btn-suppres').val();
+
+                swal({
+                    title: "Etes-vous sûr d'effectuer cette opération ?",
+                    text: "Cette action est irréversible!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        var data = {
+                            "_token": $('input[name="_token"]').val(),
+                            "id": element_id,
+                        };
+
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/equipes/'+element_id,
+                            data: data,
+                            success: function (response) {
+                                swal(response.message, {
+                                    icon: "success",
+                                })
+                                .then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        });
+
+                    } else {
+                        swal("Action annulée!");
+                    }
+            });
+          })
+      })
+  </script>
 
 
 @endsection
