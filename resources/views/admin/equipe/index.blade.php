@@ -195,7 +195,7 @@
                     <div class="modal fade bs3-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-                                <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('equipes.update', $equipe->id ) }}">
+                                <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="#">
                                 @method('PUT')
                             @csrf
                             <br>

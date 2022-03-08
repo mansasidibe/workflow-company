@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('duree');
             $table->string('etat')->nullable()->default('debut');
             $table->unsignedBigInteger('equipe_id')->index();
+            $table->unsignedBigInteger('tache_id')->index();
             // $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
         });

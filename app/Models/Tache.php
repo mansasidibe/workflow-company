@@ -22,4 +22,9 @@ class Tache extends Model
     {
         return $this->belongsTo(Membre::class);
     }
+
+    public function projet()
+    {
+        return $this->belongsTo(Projet::class);
+    }
 }

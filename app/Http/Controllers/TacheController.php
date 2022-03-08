@@ -53,9 +53,14 @@ class TacheController extends Controller
             'duree' => '',
             'executand_id' => '',
             'etat' => '',
+            'equipe_id' => '',
         ]);
 
-        dd($donnee);
+        // dd($donnee);
+
+        Tache::create($donnee);
+
+        return redirect()->back()->with('message', 'Tâche ajoutée avec succès');
     }
 
     /**

@@ -15,11 +15,16 @@ class Projet extends Model
         'duree',
         'equipe_id',
         'etat',
-        'user_id'
+        'tache_id',
     ];
 
     public function equipe()
     {
         return $this->belongsTo(Equipe::class);
+    }
+
+    public function taches()
+    {
+        return $this->hasMany(Tache::class);
     }
 }
