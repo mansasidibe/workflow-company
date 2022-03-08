@@ -19,18 +19,30 @@
                 <h3>Tâches <small>par équipes</small></h3>
               </div>
 
-              <div class="title_right">
+            @if ($projets->count())
+                <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ajouter une nouvelle tâche</button>
                   </div>
                 </div>
               </div>
+            @else
+                <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <p> Veuillez créer un projet avant </p>
+                  </div>
+                </div>
+              </div>
+            @endif
+
             </div>
 
              {{-- modal ici --}}
 
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+             @if ($projets->count())
+                     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
@@ -100,6 +112,9 @@
                       </div>
                     </div>
                   </div>
+             @else
+
+             @endif
 
             {{-- fin model --}}
 
