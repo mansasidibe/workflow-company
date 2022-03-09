@@ -4,13 +4,11 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        <div class="col-md-3 left_col">
-          @include('admin.layout.sidebar')
-        </div>
+
+         @include('admin.layout.sidebar')
 
         <!-- top navigation -->
-        @include('admin.layout.sidebar')
-        <!-- /top navigation -->
+        @include('admin.layout.navbar')
 
         <!-- page content -->
         <div class="right_col" role="main">
