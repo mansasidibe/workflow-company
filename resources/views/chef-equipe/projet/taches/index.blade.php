@@ -19,23 +19,30 @@
                 <h3>Tâches <small>par équipes</small></h3>
               </div>
 
-              @if (auth()->user()->type_utilisateur == 'chef' || auth()->user()->type_utilisateur == 'admin')
+            @if ($projets->count())
                 <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ajouter une nouvelle tâche</button>
-                    </div>
-                    </div>
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ajouter une nouvelle tâche</button>
+                  </div>
                 </div>
-              @else
-
-              @endif
+              </div>
+            @else
+                <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <p> Veuillez créer un projet avant </p>
+                  </div>
+                </div>
+              </div>
+            @endif
 
             </div>
 
              {{-- modal ici --}}
 
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+             @if ($projets->count())
+                     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
@@ -43,36 +50,56 @@
                             @csrf
                             <br>
                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Projet</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select name="projet_id" class="form-control">Choisissez le projet</option>
+                                    @if ($projets->count())
+                                        @foreach ($projets as $projet)
+                                            <option value="{{ $projet->id }}"> {{ $projet->nom }} </option>
+
+                                        @endforeach
+                                    @else
+                                        <option value="">Pas de projet</option>
+                                    @endif
+                                </select>
+                                </div>
+                            </div>
+                                <input type="hidden" name="equipe_id" value="{{ $projet->equipe->id }}">
+                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Libellé de la tâche</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" placeholder="Libellé de la tâche">
+                                    <input type="text" name="libelle" class="form-control" placeholder="Libellé de la tâche">
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Durée</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" placeholder="Durée">
+                                    <input type="text" name="duree" class="form-control" placeholder="Durée">
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Exécutant</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select class="form-control">
-                                    <option value="">Choisissez quelqu'un</option>
-                                    <option value="">Arouna </option>
-                                    <option value="">Nouria </option>
+                                <select name="executand_id" class="form-control">
+                                    @if ($projets->count())
+                                        @foreach ($projets as $projet)
+                                            <option value="1"> {{ $projet->equipe->membres }} </option>
+                                        @endforeach
+                                    @else
+                                        <option value="">Pas de taches</option>
+                                    @endif
                                 </select>
                                 </div>
                             </div>
-                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Etat</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select class="form-control">
-                                    <option value="">Pas fait</option>
-                                    <option value="">En cours </option>
-                                    <option value="">Fait </option>
-                                </select>
-                                </div>
+                            <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Etat</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                            <select name="etat" class="form-control">
+                                <option value="debut">Pas fait</option>
+                                <option value="encours">En cours </option>
+                                <option value="termine">Fait </option>
+                            </select>
+                            </div>
                             </div>
 
                             <br>
@@ -85,6 +112,9 @@
                       </div>
                     </div>
                   </div>
+             @else
+
+             @endif
 
             {{-- fin model --}}
 
@@ -138,19 +168,43 @@
                         </thead>
 
                         <tbody>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">RH SYSTEM</td>
-                            <td class=" ">02 Mars 2021 </td>
-                            <td class=" ">7 mois </td>
-                            <td class=" ">2 </td>
-                            <td class=" ">Sidick</td>
-                            <td class=" ">En cours</td>
-                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir</a>
-                            </td>
-                          </tr>
+                            @if ($projets->count())
+                                @if ($taches->count())
+                                    @foreach ($taches as $tache)
+                                        <tr class="even pointer">
+                                            <td class="a-center ">
+                                            <input type="checkbox" class="flat" name="table_records">
+                                            </td>
+                                            <td class=" ">{{ $projet->nom }}</td>
+                                            <td class=" ">{{ $projet->created_at }} </td>
+                                            <td class=" ">{{ $projet->duree }} </td>
+                                            <td class=" ">{{ $projet->equipe->membres->count() }} </td>
+                                            <td class=" ">{{ $projet->equipe->chef }}</td>
+                                            <td class=" ">
+                                                 @if ( $tache->etat == "encours")
+                                                    <button type="button" class="btn btn-warning btn-xs">En cours</button>
+                                                @elseif ( $tache->etat == "termine")
+                                                    <button type="button" class="btn btn-success btn-xs">Terminé</button>
+                                                @else
+                                                    <button type="button" class="btn btn-danger btn-xs">Début</button>
+                                                @endif
+                                            </td>
+                                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td style="text-align: center" colspan="9">Pas de taches en cours</td>
+                                    </tr>
+                                @endif
+                            @else
+                            <tr>
+                                <td style="text-align: center" colspan="9">Pas de projet en cours</td>
+                            </tr>
+
+                            @endif
+
 
                         </tbody>
                       </table>
@@ -177,18 +231,26 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Compléter dashbord</td>
-                          <td>Arouna</td>
-                          <td>2 h</td>
-                          <td>Pas fait</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          @if ($taches->count())
+                                @foreach ($taches as $tache)
+                                    <tr>
+                                        <th scope="row">{{ $tache->id }}</th>
+                                        <td>{{ $tache->libelle }}</td>
+                                        <td>Arouna</td>
+                                        <td>{{ $tache->duree }}</td>
+                                        <th>{{ $tache->etat }}</th>
+                                    </tr>
+                                @endforeach
+                          @else
+                            <tr>
+                                <td>Pas de tâche</td>
+                            </tr>
+                          @endif
+                        </tbody>
+                         </table>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                         </div>
 
                       </div>

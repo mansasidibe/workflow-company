@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipe;
 use App\Models\Projet;
+use App\Models\Tache;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,7 +41,11 @@ class EquipeController extends Controller
     public function tache()
     {
         $title = "TACHES";
-        return view('chef-equipe.projet.taches.index', compact('title'));
+        Carbon::setLocale('fr');
+        $equipes = Equipe::where('membre_id', Auth::user()->id);
+        $projets = Projet::get();
+        $taches = Tache::get();
+        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'taches'));
     }
 
     public function membre()
