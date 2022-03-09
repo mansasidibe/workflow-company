@@ -13,7 +13,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2>@auth {{ auth()->user()->nom_prenom }} @endauth @guest Personne @endguest</h2>
+                <h2>@auth {{ auth()->user()->nom_utilisateur }} @endauth @guest Personne @endguest</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -25,7 +25,11 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{ route('chef.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
+                    @if (auth()->user()->type_utilisateur == "chef")
+                        <li><a href="{{ route('chef.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
+                    @else
+                        <li><a href="{{ route('user.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
+                    @endif
                    <li><a><i class="fa fa-edit"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('equipe.projet') }}">Projets</a></li>

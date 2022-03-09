@@ -8,7 +8,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/pas_image.svg.png') }}" alt="">@auth {{ auth()->user()->nom_prenom }} @endauth @guest Personne @endguest
+                    <img src="{{ asset('images/pas_image.svg.png') }}" alt="">@auth {{ auth()->user()->nom_utilisateur }} @endauth @guest Personne @endguest
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -13,7 +13,7 @@
               </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
-                <h2>@auth {{ auth()->user()->nom_prenom }} @endauth @guest Personne @endguest</h2>
+                <h2>@auth {{ auth()->user()->nom_utilisateur }} @endauth @guest Personne @endguest</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -41,12 +41,12 @@
                       <li><a href="#">détails des empêchements</a></li>
                     </ul>
                   </li>
-                   <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
+                   {{-- <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">liste des clients</a></li>
                       <li><a href="#">profil des clients</a></li>
                     </ul>
-                  </li>
+                  </li> --}}
                   <li><a><i class="fa fa-edit"></i> Employés <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">liste des employés</a></li>
