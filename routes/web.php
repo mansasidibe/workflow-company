@@ -34,6 +34,8 @@ Route::post('/regist', [RegisterController::class, 'doregister'])->name('user.do
 Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
 Route::get('/lock', [AuthController::class, 'lock'])->name('user.lock');
 Route::post('/unlock', [AuthController::class, 'unlock'])->name('user.unlock');
+Route::get('/profil', [AuthController::class, 'profil'])->name('user.profil');
+Route::post('/profil', [AuthController::class, 'update_profil'])->name('update.profil');
 
 Route::get('/parametre', [AuthController::class, 'parametre'])->name('user.setting');
 Route::post('/parametre', [AuthController::class, 'storeParametre'])->name('user.doSetting');

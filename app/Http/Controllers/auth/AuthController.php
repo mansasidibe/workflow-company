@@ -16,6 +16,18 @@ class AuthController extends Controller
         return view('auth.login', compact('title'));
     }
 
+    public function profil()
+    {
+        $user = Auth::user();
+        $title = "PROFIL : $user->nom_utilisateur";
+        return view('auth.profile', compact('user', 'title'));
+    }
+
+    public function update_profil(User $user, Request $request)
+    {
+        dd('ok');
+    }
+
 
     public function doregister(Request $request)
     {

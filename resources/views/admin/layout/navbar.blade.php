@@ -14,7 +14,7 @@
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Paramètre</a></li>
                     <li>
-                      <a href="javascript:;">
+                      <a href="{{ route('user.profil') }}">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Profil</span>
                       </a>
