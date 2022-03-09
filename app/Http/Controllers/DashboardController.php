@@ -6,6 +6,7 @@ use App\Models\Equipe;
 use App\Models\Message;
 use App\Models\Tache;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,10 @@ class DashboardController extends Controller
         $users_femme = User::where('genre', 'F')->get();
         $equipes = Equipe::get();
         $messages = Message::get();
-        return view('admin.dashboard', compact('title', 'messages', 'users','users_homme', 'users_femme','equipes'));
+        $date = Carbon::today()->subDays();
+        $users_inscrit = User::where('created_at','>=',$date)->get();
+
+        return view('admin.dashboard', compact('title', 'messages', 'users','users_homme', 'users_femme','equipes', 'users_inscrit'));
     }
 
     public function dashbord_chef()

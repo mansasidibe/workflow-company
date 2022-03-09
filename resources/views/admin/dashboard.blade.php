@@ -18,17 +18,21 @@
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i>Nombre d'utilisateurs</span>
               <div class="count">{{ $users->count() }}</div>
-              <span class="count_bottom"><i class="green">4% </i> de la semaine dernière</span>
+              <span class="count_bottom"><i class="green">4% </i> de l'a semaine dernière'</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Temps moyens</span>
-              <div class="count">0</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> de la semaine dernière</span>
+              <span class="count_top"><i class="fa fa-clock-o"></i> Nombre d'inscrits</span>
+              <div class="count">{{  $users_inscrit->count() }}</div>
+              <span class="count_bottom">@if ($users->count() != 0)
+                    {{ ceil($users_inscrit->count() / $users->count() * 100) }}
+              @else
+                0
+              @endif% </i> dernière 24 heures</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total d'hommes</span>
               <div class="count green">{{ $users_homme->count() }}</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> de la semaine dernière</span>
+              <span class="count_bottom">34% </i> de la semaine dernière</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total de femmes</span>
