@@ -25,8 +25,8 @@ class EquipeController extends Controller
     public function chef()
     {
         $title = "LES CHEFS D'EQUIPE";
-        $equipes_chef = Equipe::get();
-        return view('admin.personnel.chef-equipe', compact('title', 'equipes_chef'));
+        $users = User::get();
+        return view('admin.personnel.chef-equipe', compact('title', 'users'));
     }
 
     public function projet()

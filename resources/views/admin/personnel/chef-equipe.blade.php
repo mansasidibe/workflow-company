@@ -47,15 +47,16 @@
                       <div class="clearfix"></div>
 
                       {{-- foreach debut ici --}}
-                      @if ($equipes_chef->count())
-                        @foreach ($equipes_chef as $chef)
+                      @if ($users->count())
+                        @foreach ($users as $user)
                         <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                             <div class="well profile_view">
                             <div class="col-sm-12">
-                                <h4 class="brief"><i>Nom de l'équipe de réalisation</i></h4>
+                                <h4 class="brief"><i>Employé</i></h4>
                                 <div class="left col-xs-7">
-                                <h2>Nom </h2> : {{ $chef->nom }}
-                                <p><strong>email: </strong>{{ $chef->email }}</p>
+                                <h5>Nom: {{ $user->nom_prenom }}</h3>
+                                <h5>Genre: {{ $user->genre }}</h3>
+                                <p><strong>email: </strong>{{ $user->email }}</p>
                                 </div>
                                 <div class="right col-xs-5 text-center">
                                 <img src="{{ asset('images/user.png') }}" alt="" class="img-circle img-responsive">

@@ -32,7 +32,7 @@
                       <li><a href="{{ route('taches.index') }}">Tâches</a></li>
                       <li><a href="{{ route('personnel.presence') }}">Fiche de temps</a></li>
                       <li><a href="{{ route('equipes.create') }}">Equipes</a></li>
-                      <li><a href="{{ route('equipe.chef') }}">Chefs d'équipes</a></li>
+                      <li><a href="{{ route('equipe.chef') }}">Employés</a></li>
                     </ul>
                   </li>
                    <li><a><i class="fa fa-edit"></i> Empêchements <span class="fa fa-chevron-down"></span></a>
