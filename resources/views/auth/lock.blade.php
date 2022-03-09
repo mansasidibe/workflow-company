@@ -18,7 +18,7 @@
                     @csrf
                   <div class="col-xs-12 form-group pull-right top_search">
                     <div class="input-group">
-                      <input type="password" name="mdp" class="form-control" placeholder="Mot de passe">
+                      <input type="password" name="password" class="form-control" placeholder="Mot de passe">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Débloquer</button>
                     </span>
