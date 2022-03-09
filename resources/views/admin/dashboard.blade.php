@@ -45,8 +45,8 @@
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> de la semaine dernière</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total de Connections</span>
-              <div class="count">0</div>
+              <span class="count_top"><i class="fa fa-user"></i> Total de projets</span>
+              <div class="count">{{ $projets->count() }}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> de la semaine dernière</span>
             </div>
           </div>

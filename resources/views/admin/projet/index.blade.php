@@ -40,19 +40,19 @@
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Nom du projet</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="nom" class="form-control" placeholder="Nom du projet">
+                                    <input type="text" name="nom" class="form-control" required placeholder="Nom du projet">
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Date de début</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="date" name="date_debut" class="form-control" placeholder="Date">
+                                    <input type="date" name="date_debut" class="form-control" required placeholder="Date">
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Durée</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="duree" class="form-control" placeholder="Durée du projet">
+                                    <input type="text" name="duree" class="form-control" required placeholder="Durée du projet">
                                 </div>
                             </div>
                              <div class="form-group">
@@ -128,7 +128,7 @@
 
                         <tr>
                             <input type="hidden" class="btn-suppres" value="{{ $projet->id }}">
-                          <td>#</td>
+                          <td>{{ $projet->id }}</td>
                           <td>
                             <a>{{ $projet->nom }}</a>
                             <br />

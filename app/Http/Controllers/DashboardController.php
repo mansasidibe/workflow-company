@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Equipe;
 use App\Models\Message;
+use App\Models\Projet;
 use App\Models\Tache;
 use App\Models\User;
 use Carbon\Carbon;
@@ -23,8 +24,9 @@ class DashboardController extends Controller
         $messages = Message::get();
         $date = Carbon::today()->subDays();
         $users_inscrit = User::where('created_at','>=',$date)->get();
+        $projets = Projet::get();
 
-        return view('admin.dashboard', compact('title', 'messages', 'users','users_homme', 'users_femme','equipes', 'users_inscrit'));
+        return view('admin.dashboard', compact('title', 'messages', 'users','users_homme', 'users_femme','equipes', 'users_inscrit', 'projets'));
     }
 
     public function dashbord_chef()

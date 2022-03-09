@@ -55,6 +55,8 @@ class ProjetController extends Controller
             'duree' => '',
             'equipe_id' => '',
         ]);
+
+        // dd($donnee);
         $projet = new Projet();
 
         $projet->nom = $request->input('nom');
