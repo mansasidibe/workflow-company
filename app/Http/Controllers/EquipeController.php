@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Projet;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EquipeController extends Controller
 {
@@ -28,7 +31,10 @@ class EquipeController extends Controller
     public function projet()
     {
         $title = "PROJETS";
-        return view('chef-equipe.projet.index', compact('title'));
+        $equipes = Equipe::where('membre_id', Auth::user()->id);
+        $projets = Projet::get();
+        Carbon::setLocale('fr');
+        return view('chef-equipe.projet.index', compact('title', 'equipes', 'projets'));
     }
 
     public function tache()

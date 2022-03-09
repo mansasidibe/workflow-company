@@ -134,7 +134,7 @@
                             <br />
                             <small>Créé le {{ $projet->created_at }}</small>
                             <br />
-                            <small>Modifié : {{ $projet->updated_at->diffForHumans() }}</small>
+                            <small>Modifié : {{ $projet->updated_at->diffForHumans() }} par : admin</small>
                           </td>
                           <td> {{ $projet->duree }} </td>
                           <td class="project_progress">
