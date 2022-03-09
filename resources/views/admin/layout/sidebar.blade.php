@@ -47,12 +47,9 @@
                       <li><a href="#">profil des clients</a></li>
                     </ul>
                   </li> --}}
-                  <li><a><i class="fa fa-edit"></i> Employés <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Ressources Humaines <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">liste des employés</a></li>
-                      <li><a href="#">profil des employé</a></li>
                       <li><a href="#">congés</a></li>
-                      <li><a href="#">Présences</a></li>
                       <li><a href="#">historiques des connexions</a></li>
                       <li><a href="#">Justification absences</a></li>
                       <li><a href="#">Departements</a></li>
@@ -60,8 +57,8 @@
                   </li>
                    <li><a><i class="fa fa-edit"></i> Evénements <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Calendrier</a></li>
-                      <li><a href="#">Envoyé messages</a></li>
+                      <li><a href="{{ route('evenements.index') }}">Calendrier</a></li>
+                      <li><a href="{{ route('message.create') }}">Envoyé messages</a></li>
                     </ul>
                   </li>
                 </ul>

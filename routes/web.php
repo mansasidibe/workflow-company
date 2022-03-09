@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PersonnelController;
@@ -49,6 +50,8 @@ Route::get('/equipe/tache', [EquipeController::class, 'tache'])->name('equipe.ta
 Route::get('/equipe/membre', [EquipeController::class, 'membre'])->name('equipe.membre');
 
 Route::get('/personnel/presence', [PersonnelController::class, 'presence'])->name('personnel.presence');
+
+Route::resource('/evenements', EvenementController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
