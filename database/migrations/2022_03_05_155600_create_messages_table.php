@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('message');
-            $table->string('fichier');
             $table->unsignedBigInteger('destinataire_id')->index();
             $table->timestamps();
         });
