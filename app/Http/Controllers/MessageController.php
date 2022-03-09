@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -28,7 +29,8 @@ class MessageController extends Controller
     {
         //
          $title = "ENVOYE UN MESSAGE";
-        return view('message.create', compact('title'));
+         $users = User::get();
+        return view('message.create', compact('title', 'users'));
     }
 
     /**
@@ -40,7 +42,11 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         //
-         dd('message envoyé');
+        $donnee = $this->validate($request, [
+            'destinataire_id' => '',
+            'message' => '',
+        ]);
+         dd($donnee);
     }
 
     /**

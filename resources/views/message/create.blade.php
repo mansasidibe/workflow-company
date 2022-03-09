@@ -22,54 +22,55 @@
             </div>
             <div class="clearfix"></div>
 
+        <form class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data" action="{{ route('message.store') }}">
+            @csrf
 
-            <div class="row">
-
-              <div class="col-md-12 col-xs-12">
+            <div class="col-md-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
+                    <div class="x_title">
                     <h2>Envoyer un messages</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
                         </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
                     </ul>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
+                    </div>
+                    <div class="x_content">
                     <br />
-                    <form class="form-horizontal form-label-left">
 
-                      <div class="form-group">
+                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Selectionnez un destinataire</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
-                            <option>Arouna SIDIBE</option>
-                          </select>
+                            <select name="destinataire_id" class="form-control">
+                            @if ($users->count())
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->nom_prenom }}</option>
+                                @endforeach
+                            @endif
+                            </select>
                         </div>
-                      </div>
+                        </div>
 
-                    </form>
-                  </div>
+
+                    </div>
                 </div>
-              </div>
-
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Text areas<small>Sessions</small></h2>
+                  <h2>Message<small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -142,15 +143,15 @@
                       <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
                       <div class="dropdown-menu input-append">
                         <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
-                        <button class="btn" type="button">Add</button>
+                        <button class="btn" type="button">Ajouter</button>
                       </div>
                       <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
                     </div>
 
-                    <div class="btn-group">
+                    {{-- <div class="btn-group">
                       <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
-                      <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-                    </div>
+                      <input type="file" name="fichier" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                    </div> --}}
 
                     <div class="btn-group">
                       <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
@@ -160,7 +161,7 @@
 
                   <div id="editor-one" class="editor-wrapper"></div>
 
-                  <textarea name="descr" id="descr" style="display:none;"></textarea>
+                  <textarea name="message" id="descr" style="display:none;"></textarea>
 
                   <br />
 
@@ -174,6 +175,7 @@
                 </div>
               </div>
             </div>
+        </form>
 
           </div>
         </div>
@@ -181,11 +183,7 @@
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+         @include('admin.layout.footer')
         <!-- /footer content -->
       </div>
     </div>
