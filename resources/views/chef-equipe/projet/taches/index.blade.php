@@ -19,7 +19,7 @@
                 <h3>Tâches <small>par équipes</small></h3>
               </div>
 
-            @if ($projets->count())
+            @if ($projets->count() && auth()->user()->type_utilisateur == "chef")
                 <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
@@ -31,7 +31,7 @@
                 <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <p> Veuillez créer un projet avant </p>
+                    <p> Bienvenue {{ Str::upper(auth()->user()->nom_utilisateur) }} </p>
                   </div>
                 </div>
               </div>

@@ -36,6 +36,10 @@ class DashboardController extends Controller
         $title = "DASHBOARD EMPLOYE";
         $equipes = Equipe::get();
         $taches = Tache::get();
-        return view('user.dashboard', compact('title', 'taches','equipes'));
+        $messages = Message::get();
+        $taches_debut = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
+        $taches_encours = Tache::where('etat', 'encours')->where('executand_id', Auth::user()->id)->get();
+        $taches_termine = Tache::where('etat', 'termine')->where('executand_id', Auth::user()->id)->get();
+        return view('user.dashboard', compact('title', 'taches','equipes', 'messages', 'taches_debut', 'taches_encours', 'taches_termine'));
     }
 }
