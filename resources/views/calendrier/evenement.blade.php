@@ -26,11 +26,16 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        @include('admin.layout.sidebar')
+          @if (auth()->user()->type_utilisateur == "admin")
+            @include('admin.layout.sidebar')
+            <!-- top navigation -->
+            @include('admin.layout.navbar')
+            <!-- /top navigation -->
+          @else
+                @include('chef-equipe.layout.sidebar')
+                @include('chef-equipe.layout.navbar')
+          @endif
 
-        <!-- top navigation -->
-        @include('admin.layout.navbar')
-        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
