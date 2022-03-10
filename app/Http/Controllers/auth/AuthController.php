@@ -25,7 +25,55 @@ class AuthController extends Controller
 
     public function update_profil(User $user, Request $request)
     {
-        dd('ok');
+        $d = $this->validate($request, [
+            'nom_prenom' => '',
+            'nom_utilisateur' => '',
+            'email' => '',
+            'photo' => '',
+            'matricule' => '',
+            'numero' => '',
+            'lien_twitter' => '',
+        ]);
+        // dd($d);
+        if ($request->email != auth()->user()->email) {
+
+            $user->nom_prenom = $request->nom_prenom;
+            $user->nom_utilisateur = $request->nom_utilisateur;
+            $user->genre = auth()->user()->genre;
+            $user->type_utilisateur = auth()->user()->type_utilisateur;
+            $user->email = $request->email;
+            $user->photo = '';
+            $user->matricule = $request->matricule;
+            $user->numero =  $request->numero;
+            $user->lien_twitter = $request->lien_twitter;
+            $user->password = auth()->user()->password;
+            if ($user->update()) {
+                return redirect()->back()->with('message', 'Modeifié avec succès');
+            } else {
+                dd('non');
+                return redirect()->back()->with('message', 'Erreur!');
+            }
+        } else {
+            dd('ok');
+            $user->nom_prenom = $request->nom_prenom;
+            $user->nom_utilisateur = $request->nom_utilisateur;
+            $user->genre = auth()->user()->genre;
+            $user->type_utilisateur = auth()->user()->type_utilisateur;
+            $user->email = auth()->user()->email;
+            $user->photo = '';
+            $user->matricule = $request->matricule;
+            $user->numero =  $request->numero;
+            $user->lien_twitter = $request->lien_twitter;
+            $user->password = auth()->user()->password;
+            if ($user->update()) {
+                return redirect()->back()->with('message', 'Modeifié avec succès');
+            } else {
+                dd('non');
+                return redirect()->back()->with('message', 'Erreur!');
+            }
+        }
+
+
     }
 
 

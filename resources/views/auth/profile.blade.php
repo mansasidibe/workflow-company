@@ -60,7 +60,14 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nom & Prénoms
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nom_prenom" value="{{ $user->nom_prenom }}" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                          <input id="nom_prenom" name="nom_prenom" value="{{ $user->nom_prenom }}" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" type="text">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nom utilisateur
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nom_prenom" name="nom_utilisateur" value="{{ $user->nom_utilisateur }}" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -73,28 +80,28 @@
                     <div class="item form-group">
                         <label for="file" class="control-label col-md-3 col-sm-3 col-xs-12">Photo</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="file" type="file" name="file"  class="form-control col-md-7 col-xs-12" >
+                          <input id="file" type="file" name="photo"  class="form-control col-md-7 col-xs-12" >
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Matricule
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="email2" name="matricule" data-validate-linked="email"  class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="email2" value="{{ $user->matricule }}" name="matricule" data-validate-linked="email"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Numéro
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="tel" id="number" name="number"  data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                          <input type="tel" id="number" name="numero" value="{{ $user->numero }}" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Lien Twitter
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="url" id="website" name="website"  placeholder="https://twitter.com/..." class="form-control col-md-7 col-xs-12">
+                          <input type="url" id="website" name="lien_twitter" value="{{ $user->lien_twitter }}"  placeholder="https://twitter.com/..." class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 

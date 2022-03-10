@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('genre');
             $table->string('type_utilisateur')->default('employe');
             $table->string('photo')->nullable();
+            $table->string('matricule')->nullable();
+            $table->string('numero')->nullable();
+            $table->string('lien_twitter')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
