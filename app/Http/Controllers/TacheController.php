@@ -7,6 +7,7 @@ use App\Models\Projet;
 use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TacheController extends Controller
 {
@@ -22,7 +23,7 @@ class TacheController extends Controller
         $equipes = Equipe::get();
         $users = User::get();
         $projets = Projet::get();
-        $taches = Tache::get();
+        $taches = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
         return view('admin.projet.taches.index', compact('title', 'equipes', 'users', 'projets', 'taches'));
     }
 
