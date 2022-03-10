@@ -189,7 +189,8 @@
                                                     <button type="button" class="btn btn-danger btn-xs">Début</button>
                                                 @endif
                                             </td>
-                                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir</a>
+                                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir | </a>
+                                                <a data-toggle="modal" data-target=".bs2-example-modal-lg" href="#">Editer</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -210,52 +211,112 @@
                       </table>
                     </div>
 
-                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
+                   <div class="modal fade bs2-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
 
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel2">Les tâches du projet RH Système</h4>
+                        @csrf
+                        <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Modifier les états des tâches</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                        <th>#</th>
+                                        <th>Tâche</th>
+                                        <th>Durée</th>
+                                        <th>Etat</th>
+                                        <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($taches->count())
+                                            @foreach ($taches as $tache)
+                                            <form action="{{ route('taches.update', $tache->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <tr>
+                                                    <th scope="row">{{ $tache->id }}</th>
+                                                    <td>{{ $tache->libelle }}</td>
+                                                    <td>{{ $tache->duree }}</td>
+                                                    <td>{{ $tache->etat }}</td>
+                                                    <td><select name="etat" class="form-control">
+                                                            <option value="debut">Pas fait</option>
+                                                            <option value="encours">En cours </option>
+                                                            <option value="termine">Fait </option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="5"></td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                            </div>
+
                         </div>
-                        <div class="modal-body">
-                         <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Tâche</th>
-                          <th>Exécutant</th>
-                          <th>Durée</th>
-                          <th>Etat</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          @if ($taches->count())
-                                @foreach ($taches as $tache)
-                                    <tr>
-                                        <th scope="row">{{ $tache->id }}</th>
-                                        <td>{{ $tache->libelle }}</td>
-                                        <td>Arouna</td>
-                                        <td>{{ $tache->duree }}</td>
-                                        <th>{{ $tache->etat }}</th>
-                                    </tr>
-                                @endforeach
-                          @else
-                            <tr>
-                                <td>Pas de tâche</td>
-                            </tr>
-                          @endif
-                        </tbody>
-                         </table>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                         </div>
 
-                      </div>
-                    </div>
                   </div>
+
+                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Les tâches du projet RH Système</h4>
+                            </div>
+                            <div class="modal-body">
+                            <table class="table">
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>Tâche</th>
+                            <th>Exécutant</th>
+                            <th>Durée</th>
+                            <th>Etat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($taches->count())
+                                    @foreach ($taches as $tache)
+                                        <tr>
+                                            <th scope="row">{{ $tache->id }}</th>
+                                            <td>{{ $tache->libelle }}</td>
+                                            <td>Arouna</td>
+                                            <td>{{ $tache->duree }}</td>
+                                            <th>{{ $tache->etat }}</th>
+                                        </tr>
+                                    @endforeach
+                            @else
+                                <tr>
+                                    <td>Pas de tâche</td>
+                                </tr>
+                            @endif
+                            </tbody>
+                            </table>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
 
 
                   </div>

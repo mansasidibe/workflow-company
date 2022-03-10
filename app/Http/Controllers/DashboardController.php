@@ -40,8 +40,9 @@ class DashboardController extends Controller
     public function dashbord_user()
     {
         $title = "DASHBOARD EMPLOYE";
+        Carbon::setLocale('fr');
         $equipes = Equipe::get();
-        $taches = Tache::get();
+        $taches = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
         $messages = Message::get();
         $taches_debut = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
         $taches_encours = Tache::where('etat', 'encours')->where('executand_id', Auth::user()->id)->get();
