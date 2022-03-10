@@ -39,8 +39,12 @@
                   </li>
                    <li><a><i class="fa fa-edit"></i> Evénements <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Calendrier</a></li>
-                      <li><a href="#">Envoyé messages</a></li>
+                      <li><a href="{{ route('evenements.index') }}">Calendrier</a></li>
+                      <li><a href="{{ route('message.create') }}">Envoyé messages</a></li>
+                    </ul>
+                    <li><a><i class="fa fa-edit"></i> Empêchements <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ route('empechement.create') }}">Déclarer un empêchement</a></li>
                     </ul>
                   </li>
                 </ul>

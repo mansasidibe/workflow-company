@@ -37,8 +37,7 @@
                   </li>
                    <li><a><i class="fa fa-edit"></i> Empêchements <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">voir les empêchements</a></li>
-                      <li><a href="#">détails des empêchements</a></li>
+                      <li><a href="{{ route('empechement.index') }}">voir les empêchements</a></li>
                     </ul>
                   </li>
                    {{-- <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
@@ -47,14 +46,14 @@
                       <li><a href="#">profil des clients</a></li>
                     </ul>
                   </li> --}}
-                  <li><a><i class="fa fa-edit"></i> Ressources Humaines <span class="fa fa-chevron-down"></span></a>
+                  {{-- <li><a><i class="fa fa-edit"></i> Ressources Humaines <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">congés</a></li>
                       <li><a href="#">historiques des connexions</a></li>
                       <li><a href="#">Justification absences</a></li>
                       <li><a href="#">Departements</a></li>
                     </ul>
-                  </li>
+                  </li> --}}
                    <li><a><i class="fa fa-edit"></i> Evénements <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('evenements.index') }}">Calendrier</a></li>
