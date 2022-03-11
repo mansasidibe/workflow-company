@@ -32,14 +32,24 @@
                       <li><a href="{{ route('taches.index') }}">Tâches</a></li>
                       {{-- <li><a href="{{ route('personnel.presence') }}">Fiche de temps</a></li> --}}
                       <li><a href="{{ route('equipes.create') }}">Equipes</a></li>
-                      <li><a href="{{ route('equipe.chef') }}">Employés</a></li>
+                      {{-- <li><a href="{{ route('equipe.chef') }}">Employés</a></li> --}}
                     </ul>
                   </li>
-                   <li><a><i class="fa fa-edit"></i> Empêchements <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ route('empechement.index') }}">voir les empêchements</a></li>
+                        <li><a href="{{ route('empechement.index') }}">Empêchements</a>
+                        <li><a>Projets<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="level2.html">UN</a>
+                            </li>
+                            <li><a href="#level2_2">DEUX</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a href="#">Tâches</a>
                     </ul>
                   </li>
+
                    {{-- <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">liste des clients</a></li>

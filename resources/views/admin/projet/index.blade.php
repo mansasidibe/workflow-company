@@ -139,9 +139,9 @@
                           <td> {{ $projet->duree }} </td>
                           <td class="project_progress">
                             <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="0"></div>
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{{ $taches_total }}"></div>
                             </div>
-                            <small>0% Completé</small>
+                            <small>{{ $taches_total }}% Completé</small>
                           </td>
                           <td>
                             @if ( $projet->etat == "encours")

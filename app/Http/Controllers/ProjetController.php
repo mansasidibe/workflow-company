@@ -24,8 +24,10 @@ class ProjetController extends Controller
         $taches = Tache::get();
         $equipes = Equipe::get();
         Carbon::setLocale('fr');
+        $taches_debut = Tache::where('etat', 'debut')->count();
+        $taches_total = Tache::count();
 
-        return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes'));
+        return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total'));
     }
 
     /**
