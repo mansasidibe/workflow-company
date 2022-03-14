@@ -26,18 +26,18 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li><a href="{{ route('admin.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
-                  
-                  <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
+
+                   <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="{{ route('projets.index') }}">projets</a>
+                        <li><a href="{{ route('equipe.projet') }}">projets</a>
                         <li><a>Tâches<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             @foreach ($projets as $projet)
-                                <li><a href="{{ route('taches.index') }}">{{ $projet->nom }}</a></li>
+                                <li><a href="{{ route('equipe.tache') }}">{{ $projet->nom }}</a></li>
                             @endforeach
                           </ul>
                         </li>
-                        <li><a href="{{ route('equipes.create') }}">Equipe</a>
+                        <li><a href="{{ route('empechement.create') }}">Déclarer un empêchement</a>
                     </ul>
                   </li>
 

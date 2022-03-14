@@ -115,7 +115,7 @@
                           <div class="clearfix"></div>
                         </div>
                         <div class="panel-body">
-                          <h3 class="green"><i class="fa fa-paint-brush"></i> {{ $projet->nom }}</h3>
+                          <h3 class="green"><i class="fa fa-paint-brush"></i> </h3>
 
                           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ullam non illum maxime, aperiam porro consectetur dolor hic doloribus amet eveniet aliquid dolorum eligendi facilis assumenda unde! Labore, reiciendis dolore!.</p>
                           <br />

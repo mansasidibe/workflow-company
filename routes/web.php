@@ -52,6 +52,8 @@ Route::get('/equipe/projet', [EquipeController::class, 'projet'])->name('equipe.
 Route::get('/equipe/tache', [EquipeController::class, 'tache'])->name('equipe.tache');
 Route::get('/equipe/membre', [EquipeController::class, 'membre'])->name('equipe.membre');
 
+// Route::get('/tache/{id}/show', [TacheController::class, 'shown'])->name('taches.shown');
+
 Route::get('/personnel/presence', [PersonnelController::class, 'presence'])->name('personnel.presence');
 
 Route::resource('/evenements', EvenementController::class);
