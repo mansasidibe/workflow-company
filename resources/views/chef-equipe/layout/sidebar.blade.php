@@ -30,11 +30,17 @@
                     @else
                         <li><a href="{{ route('user.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
                     @endif
-                   <li><a><i class="fa fa-edit"></i> Projets <span class="fa fa-chevron-down"></span></a>
+                     <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ route('equipe.projet') }}">Projets</a></li>
-                      <li><a href="{{ route('equipe.tache') }}">Tâches</a></li>
-                      <li><a href="{{ route('equipe.membre') }}">Equipe</a></li>
+                        <li><a href="{{ route('equipe.projet') }}">projets</a>
+                        <li><a>Tâches<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            @foreach ($projets as $projet)
+                                <li><a href="{{ route('equipe.tache') }}">{{ $projet->nom }}</a></li>
+                            @endforeach
+                          </ul>
+                        </li>
+                        <li><a href="{{ route('empechement.create') }}">Déclarer un empêchement</a>
                     </ul>
                   </li>
                    <li><a><i class="fa fa-edit"></i> Evénements <span class="fa fa-chevron-down"></span></a>
@@ -42,11 +48,7 @@
                       <li><a href="{{ route('evenements.index') }}">Calendrier</a></li>
                       <li><a href="{{ route('message.create') }}">Envoyé messages</a></li>
                     </ul>
-                    <li><a><i class="fa fa-edit"></i> Empêchements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ route('empechement.create') }}">Déclarer un empêchement</a></li>
-                    </ul>
-                  </li>
+
                 </ul>
               </div>
 

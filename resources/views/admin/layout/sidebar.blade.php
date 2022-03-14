@@ -37,16 +37,19 @@
                   </li>
                   <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="{{ route('empechement.index') }}">Empêchements</a>
-                        <li><a>Projets<span class="fa fa-chevron-down"></span></a>
+                        <li><a href="{{ route('empechement.index') }}">projets</a>
+                        <li><a>Tâches<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">UN</a>
+                            {{-- <li class="sub_menu"><a href="level2.html">UN</a>
                             </li>
                             <li><a href="#level2_2">DEUX</a>
-                            </li>
+                            </li> --}}
+                            @foreach ($projets as $projet)
+                                <li><a href="#level2_2">{{ $projet->nom }}</a></li>
+                            @endforeach
                           </ul>
                         </li>
-                        <li><a href="#">Tâches</a>
+                        <li><a href="#">Empêchements</a>
                     </ul>
                   </li>
 

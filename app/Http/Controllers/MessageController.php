@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\Projet;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class MessageController extends Controller
     {
         //
         $title = "MESSAGES";
-        return view('message.index', compact('title'));
+        $projets = Projet::get();
+        return view('message.index', compact('title', 'projets'));
     }
 
     /**
@@ -30,7 +32,8 @@ class MessageController extends Controller
         //
          $title = "ENVOYE UN MESSAGE";
          $users = User::get();
-        return view('message.create', compact('title', 'users'));
+        $projets = Projet::get();
+        return view('message.create', compact('title', 'users', 'projets'));
     }
 
     /**

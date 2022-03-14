@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
+use App\Models\Projet;
 use Illuminate\Http\Request;
 
 class EvenementController extends Controller
@@ -15,7 +16,8 @@ class EvenementController extends Controller
     public function index()
     {
         $title = "CALENDRIER";
-        return view('calendrier.evenement', compact('title'));
+        $projets = Projet::get();
+        return view('calendrier.evenement', compact('title', 'projets'));
     }
 
     /**

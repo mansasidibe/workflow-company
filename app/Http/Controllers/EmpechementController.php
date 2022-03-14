@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empechement;
+use App\Models\Projet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class EmpechementController extends Controller
         $title = "TOUS LES EMPECHEMENTS";
         $empechements = Empechement::where('created_at', '>=', Carbon::now()->subDay())->latest()->get();
         $tous_empechement = Empechement::get();
-        return view('empechement.index', compact('title', 'empechements', 'tous_empechement'));
+        $projets = Projet::get();
+        return view('empechement.index', compact('title', 'empechements', 'tous_empechement', 'projets'));
     }
 
     /**
@@ -31,7 +33,8 @@ class EmpechementController extends Controller
     {
         //
         $title = "DECLARER UN EMPECHEMENT";
-        return view('empechement.create', compact('title'));
+        $projets = Projet::get();
+        return view('empechement.create', compact('title', 'projets'));
     }
 
     /**
