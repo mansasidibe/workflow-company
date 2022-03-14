@@ -26,30 +26,18 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                   <li><a href="{{ route('admin.dashbord') }}"><i class="fa fa-home"></i> Accueil</a></li>
-                   <li><a><i class="fa fa-edit"></i> Projets <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ route('projets.index') }}">Projets</a></li>
-                      <li><a href="{{ route('taches.index') }}">Tâches</a></li>
-                      {{-- <li><a href="{{ route('personnel.presence') }}">Fiche de temps</a></li> --}}
-                      <li><a href="{{ route('equipes.create') }}">Equipes</a></li>
-                      {{-- <li><a href="{{ route('equipe.chef') }}">Employés</a></li> --}}
-                    </ul>
-                  </li>
+                  
                   <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="{{ route('empechement.index') }}">projets</a>
+                        <li><a href="{{ route('projets.index') }}">projets</a>
                         <li><a>Tâches<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                            {{-- <li class="sub_menu"><a href="level2.html">UN</a>
-                            </li>
-                            <li><a href="#level2_2">DEUX</a>
-                            </li> --}}
                             @foreach ($projets as $projet)
-                                <li><a href="#level2_2">{{ $projet->nom }}</a></li>
+                                <li><a href="{{ route('taches.index') }}">{{ $projet->nom }}</a></li>
                             @endforeach
                           </ul>
                         </li>
-                        <li><a href="#">Empêchements</a>
+                        <li><a href="{{ route('equipes.create') }}">Equipe</a>
                     </ul>
                   </li>
 
