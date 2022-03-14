@@ -39,7 +39,8 @@ class ProjetController extends Controller
     {
         //
         $title = "CREATION PROJETS";
-        return view('admin.projet.create', compact('title'));
+        $projets = Projet::get();
+        return view('admin.projet.create', compact('title', 'projets'));
     }
 
     /**
@@ -82,7 +83,8 @@ class ProjetController extends Controller
     {
         //
         $title = "DETAILS";
-        return view('admin.projet.show', compact('projet', 'title'));
+        $projets = Projet::get();
+        return view('admin.projet.show', compact('projet', 'title', 'projets'));
     }
 
     /**

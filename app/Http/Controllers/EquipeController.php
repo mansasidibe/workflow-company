@@ -26,7 +26,8 @@ class EquipeController extends Controller
     {
         $title = "LES CHEFS D'EQUIPE";
         $users = User::get();
-        return view('admin.personnel.chef-equipe', compact('title', 'users'));
+        $projets = Projet::get();
+        return view('admin.personnel.chef-equipe', compact('title', 'users', 'projets'));
     }
 
     public function projet()
@@ -52,7 +53,8 @@ class EquipeController extends Controller
     {
         $title = "TACHES";
         $equipes_chef = Equipe::get();
-        return view('chef-equipe.equipe.list', compact('title', 'equipes_chef'));
+        $projets = Projet::get();
+        return view('chef-equipe.equipe.list', compact('title', 'equipes_chef', 'projets'));
     }
 
     /**
@@ -66,7 +68,8 @@ class EquipeController extends Controller
         $title = "TACHES";
         $users = User::get();
         $equipes = Equipe::get();
-        return view('admin.equipe.index', compact('title', 'users', 'equipes'));
+        $projets = Projet::get();
+        return view('admin.equipe.index', compact('title', 'users', 'equipes', 'projets'));
 
     }
 
