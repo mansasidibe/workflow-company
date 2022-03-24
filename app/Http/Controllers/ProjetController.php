@@ -30,6 +30,18 @@ class ProjetController extends Controller
         return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total'));
     }
 
+    public function id(Request $request, Tache $projet)
+    {
+
+        // dd($request->input('etat'));
+        // $projet->equipe_id = $request->input('equipe_id');
+        $projet->etat = $request->input('etat');
+        // $projet->user_id = Auth()->user()->id;
+        $projet->update();
+        // dd('ok');
+        return redirect()->back()->with('message', 'Tâche '.$request->input('etat').' avec succès');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

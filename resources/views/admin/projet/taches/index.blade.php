@@ -148,20 +148,25 @@
                                     <td class=" ">
                                         @if ($object->etat === "encours")
                                             <button type="button" class="btn btn-warning btn-xs">En cours</button>
-                                        @elseif ( $object->etat === "debut")
+                                        @elseif ( $object->etat === "termine")
                                             <button type="button" class="btn btn-success btn-xs">Terminé</button>
                                         @else
                                             <button type="button" class="btn btn-danger btn-xs">Début</button>
                                         @endif
                                     </td>
-                                    <td style="text-align:center;"><select class="form-control" style="width: 100px;"  name="tache">
-                                        <option value="debut">début</option>
-                                        <option value="encours">en cours</option>
-                                        <option value="termine">terminée</option>
-                                    </select>
-                                    <td>      
-                                        <button type="button" class="btn btn-primary" data-toggle="modal">valider</button>
-                                    </td>
+                                    <form action="{{ route('equipe.id', $object->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <td style="text-align:center;">
+                                        <select class="form-control" style="width: 100px;"  name="etat">
+                                            <option value="debut">début</option>
+                                            <option value="encours">en cours</option>
+                                            <option value="termine">terminée</option>
+                                        </select>
+                                        <td>      
+                                            <button type="submit" class="btn btn-primary" data-toggle="modal">valider</button>
+                                        </td>
+                                    </form>
                                     </td>
                                 </tr>
                             @endforeach
