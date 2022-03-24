@@ -82,8 +82,9 @@ class ProjetController extends Controller
     public function show(Projet $projet)
     {
         //
-        $title = "DETAILS";
+        $title = "TACHES";
         $projets = Projet::get();
+        
         return view('admin.projet.taches.index', compact('projet', 'title', 'projets'));
     }
 

@@ -76,7 +76,7 @@ class TacheController extends Controller
     {
         //
         $title = "DETAILS";
-        return view('admin.projet.show', $tache);
+        return view('admin.projet.show', compact($tache));
     }
 
     /**

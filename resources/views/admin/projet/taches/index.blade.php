@@ -123,8 +123,8 @@
                             <th class="column-title">Libellé </th>
                             <th class="column-title">Durée </th>
                             <th class="column-title">Exécutant </th>
+                            <th class="column-title">Temps d'ajout </th>
                             <th class="column-title">Status </th>
-                            <th class="column-title">Action </th>
                             <th class="column-title no-link last"><span class="nobr">Action</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
@@ -135,19 +135,29 @@
 
                         <tbody>
                         @if ($projet->taches->count())
-                            <tr class="even pointer">
-                                <td class="a-center ">
-                                <input type="checkbox" class="flat" name="table_records">
-                                </td>
-                                <td class=" ">{{ $projet->id }}</td>
-                                <td class=" ">May 23, 2014 11:47:56 PM </td>
-                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                                <td class=" ">John Blank L</td>
-                                <td class=" ">Paid</td>
-                                <td class="a-right a-right ">$7.45</td>
-                                <td class=" last"><a href="#">View</a>
-                                </td>
-                            </tr>
+                            @foreach ($projet->taches as $key => $object)
+                                <tr class="even pointer">
+                                    <td class="a-center ">
+                                    <input type="checkbox" class="flat" name="table_records">
+                                    </td>
+                                    <td class=" "> {{ $object->libelle }}</td>
+                                    <td class=" ">{{ $object->duree }}</td>
+                                    <td class=" ">{{ $object->membre }}</i></td>
+                                    <td class=" "> {{ $object->created_at->diffForHumans() }}</td>
+                                    <td class=" ">
+                                        @if (  $object->etat === "encours")
+                                            <button type="button" class="btn btn-warning btn-xs">En cours</button>
+                                        @elseif ( $object->etat === "termine")
+                                            <button type="button" class="btn btn-success btn-xs">Terminé</button>
+                                        @else
+                                            <button type="button" class="btn btn-danger btn-xs">Début</button>
+                                        @endif
+                                    </td>
+                                    <td class=" last"><a href="#">View</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                                
                         @else
                             <tr>
                                 <td colspan="9" style="text-align: center;">Il n'ya pas encore de tâche {{ $projet->taches->count() }}</td>
