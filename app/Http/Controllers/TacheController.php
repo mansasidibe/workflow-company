@@ -49,17 +49,19 @@ class TacheController extends Controller
     {
         //
         $donnee = $this->validate($request, [
-            'projet_id' => '',
             'libelle' => '',
             'duree' => '',
             'executand_id' => '',
             'etat' => '',
-            'equipe_id' => '',
         ]);
 
-        // dd($donnee);
-
-        Tache::create($donnee);
+        $projet = new Projet();
+        
+        $projet->taches()->create([
+            'libelle' => $request->libelle,
+            'duree' => $request->duree,
+            'executand_id' => $request->executand_id,
+        ]);
 
         return redirect()->back()->with('message', 'Tâche ajoutée avec succès');
     }

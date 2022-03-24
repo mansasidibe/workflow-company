@@ -124,6 +124,7 @@ class ProjetController extends Controller
         $projet->etat = $request->input('etat');
         // $projet->user_id = Auth()->user()->id;
         $projet->update();
+        
 
         return redirect()->back()->with('message', 'Projet mis à jour avec succès!');
     }

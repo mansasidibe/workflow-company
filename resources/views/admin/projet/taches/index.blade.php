@@ -14,22 +14,75 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
+
             <div class="page-title">
               <div class="title_left">
-                <h3>Tâches <small>ici</small></h3>
+                <h3>Projets</h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Recherche...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Lancer!</button>
-                    </span>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Nouvelles tâches</button>
                   </div>
                 </div>
               </div>
             </div>
+
+            {{-- modal ici --}}
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('taches.store') }}">
+                            @csrf
+                            <br>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Libellé </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="libelle" class="form-control" required placeholder="Nom de la tâche">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Durée</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="duree" class="form-control" required placeholder="Durée de la tâche">
+                                </div>
+                            </div>
+                             {{-- <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Exécutant</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" name="duree" class="form-control" required placeholder="Durée du projet">
+                                </div>
+                            </div> --}}
+                             <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Exécutant</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                <select name="executand_id" class="form-control">
+                                    @if ($projet->equipe->membres->count())
+                                        @foreach ($projet->equipe->membres as $equipe)
+                                            <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
+                                        @endforeach
+                                    @else
+                                    <option value="neant">Pas d'équipe</option>
+                                    @endif
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <br>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </form>
+
+                      </div>
+                    </div>
+            </div>
+
+            {{-- fin model --}}
 
             <div class="clearfix"></div>
 
