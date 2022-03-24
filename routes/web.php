@@ -41,6 +41,7 @@ Route::post('/profil', [AuthController::class, 'update_profil'])->name('update.p
 Route::get('/parametre', [AuthController::class, 'parametre'])->name('user.setting');
 Route::post('/parametre', [AuthController::class, 'storeParametre'])->name('user.doSetting');
 
+
 Route::resource('/projets', ProjetController::class);
 Route::resource('/taches', TacheController::class);
 Route::resource('/message', MessageController::class);

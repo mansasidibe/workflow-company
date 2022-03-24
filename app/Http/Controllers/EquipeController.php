@@ -45,7 +45,7 @@ class EquipeController extends Controller
         Carbon::setLocale('fr');
         $equipes = Equipe::where('membre_id', Auth::user()->id);
         $projets = Projet::get();
-        $taches = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
+        $taches = Tache::get();
         return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'taches'));
     }
 

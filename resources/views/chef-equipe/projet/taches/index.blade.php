@@ -19,7 +19,7 @@
                 <h3>Tâches <small>par équipes</small></h3>
               </div>
 
-            @if ($projets->count() && auth()->user()->type_utilisateur == "chef")
+            @if ($projets->count() && auth()->user()->type_utilisateur == "chef" || auth()->user()->type_utilisateur == "admin")
                 <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
@@ -175,7 +175,7 @@
                                             <td class="a-center ">
                                             <input type="checkbox" class="flat" name="table_records">
                                             </td>
-                                            <td class=" ">{{ $projet->nom }}</td>
+                                            <td class=" ">{{ $tache->libelle }}</td>
                                             <td class=" ">{{ $projet->created_at }} </td>
                                             <td class=" ">{{ $projet->duree }} </td>
                                             <td class=" ">{{ $projet->equipe->membres->count() }} </td>

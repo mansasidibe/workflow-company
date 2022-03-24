@@ -37,16 +37,15 @@
                             @endforeach
                           </ul>
                         </li>
-                        <li><a href="{{ route('empechement.create') }}">Déclarer un empêchement</a>
+                        <li><a href="{{ route('empechement.create') }}">Voir les empêchements</a>
                     </ul>
                   </li>
 
-                   {{-- <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
+                   <li><a><i class="fa fa-edit"></i> Equipes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">liste des clients</a></li>
-                      <li><a href="#">profil des clients</a></li>
+                      <li><a href="{{ route('equipes.create') }}">voir les équpes</a></li>
                     </ul>
-                  </li> --}}
+                  </li>
                   {{-- <li><a><i class="fa fa-edit"></i> Ressources Humaines <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">congés</a></li>
