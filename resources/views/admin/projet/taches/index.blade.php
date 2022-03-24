@@ -64,6 +64,7 @@
                                         @foreach ($projet->equipe->membres as $equipe)
                                             <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
                                         @endforeach
+                                        <input type="hidden" value="{{ $projet->id }}" name="projet_id">
                                     @else
                                     <option value="neant">Pas d'équipe</option>
                                     @endif
