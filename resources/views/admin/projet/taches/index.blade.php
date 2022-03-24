@@ -16,114 +16,29 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Tâches <small>par équipes</small></h3>
+                <h3>Tâches <small>ici</small></h3>
               </div>
 
-            @if ($projets->count())
-                <div class="title_right">
+              <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ajouter une nouvelle tâche</button>
+                    <input type="text" class="form-control" placeholder="Recherche...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Lancer!</button>
+                    </span>
                   </div>
                 </div>
               </div>
-            @else
-                <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <p> Veuillez créer un projet avant </p>
-                  </div>
-                </div>
-              </div>
-            @endif
-
             </div>
 
-             {{-- modal ici --}}
-
-             @if ($projets->count())
-                     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-
-                        <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('taches.store') }}">
-                            @csrf
-                            <br>
-                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Projet</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select name="projet_id" class="form-control">Choisissez le projet</option>
-                                    @if ($projets->count())
-                                        @foreach ($projets as $projet)
-                                            <option value="{{ $projet->id }}"> {{ $projet->nom }} </option>
-
-                                        @endforeach
-                                    @else
-                                        <option value="">Pas de produit</option>
-                                    @endif
-                                </select>
-                                </div>
-                            </div>
-                                <input type="hidden" name="equipe_id" value="{{ $projet->equipe->id }}">
-                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Libellé de la tâche</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="libelle" class="form-control" placeholder="Libellé de la tâche">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Durée</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" name="duree" class="form-control" placeholder="Durée">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Exécutant</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select name="executand_id" class="form-control">
-                                    @if ($projets->count())
-                                        @foreach ($projets as $projet)
-                                            <option value="1"> {{ $projet->equipe->membres }} </option>
-                                        @endforeach
-                                    @else
-                                        <option value="">Pas de taches</option>
-                                    @endif
-                                </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Etat</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                            <select name="etat" class="form-control">
-                                <option value="debut">Pas fait</option>
-                                <option value="encours">En cours </option>
-                                <option value="termine">Fait </option>
-                            </select>
-                            </div>
-                            </div>
-
-                            <br>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
-                            </div>
-                        </form>
-
-                      </div>
-                    </div>
-                  </div>
-             @else
-
-             @endif
-
-            {{-- fin model --}}
-
             <div class="clearfix"></div>
+
+            <div class="row">
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Projet <small>Voir les tâches</small></h2>
+                    <h2>Toutes les tâches</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -144,8 +59,6 @@
 
                   <div class="x_content">
 
-                    <p>Choisissez un projet pour voir les tâches qui lui sont liées</p>
-
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
@@ -153,13 +66,12 @@
                             <th>
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
-                            <th class="column-title">Nom </th>
-                            <th class="column-title">Date début </th>
-                            <th class="column-title">Duré du projet </th>
-                            <th class="column-title">Nombre de personnes </th>
-                            <th class="column-title">Chef d'équipe </th>
+                            <th class="column-title">Libellé </th>
+                            <th class="column-title">Durée </th>
+                            <th class="column-title">Exécutant </th>
                             <th class="column-title">Status </th>
-                            <th class="column-title no-link last"><span class="nobr">Tâches</span>
+                            <th class="column-title">Action </th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -168,94 +80,29 @@
                         </thead>
 
                         <tbody>
-                            @if ($projets->count())
-                                @if ($taches->count())
-                                    @foreach ($taches as $tache)
-                                        <tr class="even pointer">
-                                            <td class="a-center ">
-                                            <input type="checkbox" class="flat" name="table_records">
-                                            </td>
-                                            <td class=" ">{{ $projet->nom }}</td>
-                                            <td class=" ">{{ $projet->created_at }} </td>
-                                            <td class=" ">{{ $projet->duree }} </td>
-                                            <td class=" ">{{ $projet->equipe->membres->count() }} </td>
-                                            <td class=" ">{{ $projet->equipe->chef }}</td>
-                                            <td class=" ">
-                                                 @if ( $tache->etat == "encours")
-                                                    <button type="button" class="btn btn-warning btn-xs">En cours</button>
-                                                @elseif ( $tache->etat == "termine")
-                                                    <button type="button" class="btn btn-success btn-xs">Terminé</button>
-                                                @else
-                                                    <button type="button" class="btn btn-danger btn-xs">Début</button>
-                                                @endif
-                                            </td>
-                                            <td class=" last"><a data-toggle="modal" data-target=".bs-example-modal-sm" href="#">Voir</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td style="text-align: center" colspan="9">Pas de taches en cours</td>
-                                    </tr>
-                                @endif
-                            @else
-                            <tr>
-                                <td style="text-align: center" colspan="9">Pas de projet en cours</td>
+                        @if ($projet->taches->count())
+                            <tr class="even pointer">
+                                <td class="a-center ">
+                                <input type="checkbox" class="flat" name="table_records">
+                                </td>
+                                <td class=" ">{{ $projet->tache_id }}</td>
+                                <td class=" ">May 23, 2014 11:47:56 PM </td>
+                                <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                                <td class=" ">John Blank L</td>
+                                <td class=" ">Paid</td>
+                                <td class="a-right a-right ">$7.45</td>
+                                <td class=" last"><a href="#">View</a>
+                                </td>
                             </tr>
-
-                            @endif
-
+                        @else
+                            <tr>
+                                <td colspan="9" style="text-align: center;">Il n'ya pas encore de tâche</td>
+                            </tr>
+                        @endif
 
                         </tbody>
                       </table>
                     </div>
-
-                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
-
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel2">Les tâches du projet RH Système</h4>
-                        </div>
-                        <div class="modal-body">
-                         <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Tâche</th>
-                          <th>Exécutant</th>
-                          <th>Durée</th>
-                          <th>Etat</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          @if ($taches->count())
-                                @foreach ($taches as $tache)
-                                    <tr>
-                                        <th scope="row">{{ $tache->id }}</th>
-                                        <td>{{ $tache->libelle }}</td>
-                                        <td>Arouna</td>
-                                        <td>{{ $tache->duree }}</td>
-                                        <th>{{ $tache->etat }}</th>
-                                    </tr>
-                                @endforeach
-                          @else
-                            <tr>
-                                <td>Pas de tâche</td>
-                            </tr>
-                          @endif
-                        </tbody>
-                         </table>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
 
 
                   </div>
@@ -267,7 +114,12 @@
         <!-- /page content -->
 
         <!-- footer content -->
-       @include('admin.layout.footer')
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
         <!-- /footer content -->
       </div>
     </div>

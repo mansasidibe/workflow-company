@@ -12,6 +12,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\TacheController;
+use App\Models\Projet;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,7 @@ Route::post('/parametre', [AuthController::class, 'storeParametre'])->name('user
 
 
 Route::resource('/projets', ProjetController::class);
+Route::get('/projet/tache/{projets}', [ProjetController::class, 'tache'])->name('projet.tache');
 Route::resource('/taches', TacheController::class);
 Route::resource('/message', MessageController::class);
 Route::resource('/equipes', EquipeController::class);
@@ -50,7 +52,7 @@ Route::resource('/membre', MembreController::class);
 Route::get('/projet/{projet}/suppression', [ProjetController::class, 'destroy'])->name('projet.destroy');
 Route::get('/equipe/chef', [EquipeController::class, 'chef'])->name('equipe.chef');
 Route::get('/equipe/projet', [EquipeController::class, 'projet'])->name('equipe.projet');
-Route::get('/equipe/tache', [EquipeController::class, 'tache'])->name('equipe.tache');
+Route::get('/equipe/tache/{projets}', [EquipeController::class, 'tache'])->name('equipe.tache');
 Route::get('/equipe/membre', [EquipeController::class, 'membre'])->name('equipe.membre');
 
 // Route::get('/tache/{id}/show', [TacheController::class, 'shown'])->name('taches.shown');
@@ -63,3 +65,6 @@ Route::resource('/empechement', EmpechementController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+

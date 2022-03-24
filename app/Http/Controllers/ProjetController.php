@@ -84,8 +84,9 @@ class ProjetController extends Controller
         //
         $title = "DETAILS";
         $projets = Projet::get();
-        return view('admin.projet.show', compact('projet', 'title', 'projets'));
+        return view('admin.projet.taches.index', compact('projet', 'title', 'projets'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

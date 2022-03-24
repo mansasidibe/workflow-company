@@ -29,15 +29,15 @@
 
                    <li><a><i class="fa fa-sitemap"></i> Projets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="{{ route('equipe.projet') }}">projets</a>
+                        <li><a href="{{ route('projets.index') }}">projets</a>
                         <li><a>Tâches<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             @foreach ($projets as $projet)
-                                <li><a href="{{ route('equipe.tache') }}">{{ $projet->nom }}</a></li>
+                                <li><a href="{{ route('projets.update', $projet->id) }}">{{ $projet->nom }}</a></li>
                             @endforeach
                           </ul>
                         </li>
-                        <li><a href="{{ route('empechement.create') }}">Voir les empêchements</a>
+                        <li><a href="{{ route('empechement.index') }}">Voir les empêchements</a>
                     </ul>
                   </li>
 

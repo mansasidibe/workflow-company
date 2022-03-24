@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('libelle');
             $table->string('duree');
             $table->string('etat');
-            $table->string('projet_id');
+            $table->integer('projet_id')->unsigned()->index()->foreign()->references("id")->on("projets")->onDelete("cascade");
             $table->string('executand_id');
             $table->unsignedBigInteger('equipe_id')->index();
             $table->timestamps();

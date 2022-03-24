@@ -36,7 +36,7 @@
                         <li><a>Tâches<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             @foreach ($projets as $projet)
-                                <li><a href="{{ route('equipe.tache') }}">{{ $projet->nom }}</a></li>
+                                <li><a href="{{ route('equipe.tache', $projet->id) }}">{{ $projet->nom }}</a></li>
                             @endforeach
                           </ul>
                         </li>

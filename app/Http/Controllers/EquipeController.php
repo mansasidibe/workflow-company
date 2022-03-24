@@ -39,13 +39,14 @@ class EquipeController extends Controller
         return view('chef-equipe.projet.index', compact('title', 'equipes', 'projets'));
     }
 
-    public function tache()
+    public function tache(Projet $projets)
     {
+        // dd($projets);
         $title = "TACHES";
         Carbon::setLocale('fr');
         $equipes = Equipe::where('membre_id', Auth::user()->id);
-        $projets = Projet::get();
         $taches = Tache::get();
+
         return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'taches'));
     }
 
