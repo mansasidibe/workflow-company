@@ -16,6 +16,7 @@ class Tache extends Model
        'projet_id',
        'executand_id',
        'equipe_id',
+       'executand_nom',
     ];
 
     public function membre()

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('etat')->default('debut');
             $table->integer('projet_id')->unsigned()->index()->foreign()->references("id")->on("projets")->onDelete("cascade");
             $table->string('executand_id');
+            $table->string('executand_nom');
             $table->timestamps();
         });
     }

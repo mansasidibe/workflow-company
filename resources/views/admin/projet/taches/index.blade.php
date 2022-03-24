@@ -63,6 +63,7 @@
                                     @if ($projet->equipe->membres->count())
                                         @foreach ($projet->equipe->membres as $equipe)
                                             <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option>
+                                            <input type="hidden" value="{{ $equipe->nom }}" name="executand_nom">
                                         @endforeach
                                         <input type="hidden" value="{{ $projet->id }}" name="projet_id">
                                     @else
@@ -125,7 +126,7 @@
                             <th class="column-title">Exécutant </th>
                             <th class="column-title">Temps d'ajout </th>
                             <th class="column-title">Status </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            <th colspan="2" class="column-title no-link last"><span class="nobr">Action</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -142,18 +143,25 @@
                                     </td>
                                     <td class=" "> {{ $object->libelle }}</td>
                                     <td class=" ">{{ $object->duree }}</td>
-                                    <td class=" ">{{ $object->membre }}</i></td>
+                                    <td class=" ">{{ $object->executand_nom }}</td>
                                     <td class=" "> {{ $object->created_at->diffForHumans() }}</td>
                                     <td class=" ">
-                                        @if (  $object->etat === "encours")
+                                        @if ($object->etat === "encours")
                                             <button type="button" class="btn btn-warning btn-xs">En cours</button>
-                                        @elseif ( $object->etat === "termine")
+                                        @elseif ( $object->etat === "debut")
                                             <button type="button" class="btn btn-success btn-xs">Terminé</button>
                                         @else
                                             <button type="button" class="btn btn-danger btn-xs">Début</button>
                                         @endif
                                     </td>
-                                    <td class=" last"><a href="#">View</a>
+                                    <td style="text-align:center;"><select class="form-control" style="width: 100px;"  name="tache">
+                                        <option value="debut">début</option>
+                                        <option value="encours">en cours</option>
+                                        <option value="termine">terminée</option>
+                                    </select>
+                                    <td>      
+                                        <button type="button" class="btn btn-primary" data-toggle="modal">valider</button>
+                                    </td>
                                     </td>
                                 </tr>
                             @endforeach

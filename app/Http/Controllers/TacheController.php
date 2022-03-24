@@ -54,13 +54,15 @@ class TacheController extends Controller
             'executand_id' => '',
             'etat' => '',
             'projet_id' => '',
+            'executand_nom' => '',
         ]);
-        
+
         Tache::create([
             'libelle' => $request->libelle,
             'duree' => $request->duree,
             'executand_id' => $request->executand_id,
             'projet_id' => $request->projet_id,
+            'executand_nom' => $request->executand_nom,
         ]);
 
         return redirect()->back()->with('message', 'Tâche ajoutée avec succès');
