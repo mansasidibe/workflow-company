@@ -153,6 +153,14 @@ class ProjetController extends Controller
         return redirect()->back()->with('message', 'Projet mis à jour avec succès!');
     }
 
+    public function tache_chef(Projet $projet)
+    {
+        $title = "TACHES";
+        $projets = Projet::get();
+
+        return view('chef-equipe.projet.taches.index', compact('projet', 'title', 'projets'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
