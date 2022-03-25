@@ -8,6 +8,7 @@ use App\Models\Tache;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjetController extends Controller
 {
@@ -21,13 +22,19 @@ class ProjetController extends Controller
         //
         $title = "TOUS LES PROJETS";
         $projets = Projet::get();
-        $taches = Tache::get();
+        $taches_tota = Tache::get()->count();
         $equipes = Equipe::get();
         Carbon::setLocale('fr');
         $taches_debut = Tache::where('etat', 'debut')->count();
         $taches_total = Tache::count();
 
-        return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total'));
+        $taches = DB::table('taches')
+                 ->select('projet_id', DB::raw('count(*) as total'))
+                 ->groupBy('projet_id')
+                 ->where('etat', '!=', 'termine')
+                 ->get();
+
+        return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total', 'taches_tota'));
     }
 
     public function id(Request $request, Tache $projet)
@@ -96,7 +103,7 @@ class ProjetController extends Controller
         //
         $title = "TACHES";
         $projets = Projet::get();
-        
+
         return view('admin.projet.taches.index', compact('projet', 'title', 'projets'));
     }
 
@@ -137,7 +144,7 @@ class ProjetController extends Controller
         $projet->etat = $request->input('etat');
         // $projet->user_id = Auth()->user()->id;
         $projet->update();
-        
+
 
         return redirect()->back()->with('message', 'Projet mis à jour avec succès!');
     }

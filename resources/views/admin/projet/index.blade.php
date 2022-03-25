@@ -139,9 +139,23 @@
                           <td> {{ $projet->duree }} </td>
                           <td class="project_progress">
                             <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="{{ $taches_total }}"></div>
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="
+                               @foreach ($taches as $key => $value)
+                                    @if($value->projet_id == $projet->id && $taches_tota > 0)
+                                        {{ ($projet->id * 100)/$taches_tota }}
+                                    @endif
+                                @endforeach">
+                              </div>
                             </div>
-                            <small>{{ $taches_total }}% Completé</small>
+                            <small>
+
+                                @foreach ($taches as $key => $value)
+                                    @if($value->projet_id == $projet->id && $taches_tota > 0)
+                                        {{ ($projet->id * 100)/$taches_tota}}
+                                    @endif
+                                @endforeach
+
+                                0% Completé</small>
                           </td>
                           <td>
                             @if ( $projet->etat == "encours")
