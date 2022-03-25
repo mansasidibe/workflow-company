@@ -112,7 +112,6 @@ class ProjetController extends Controller
         return view('admin.projet.taches.index', compact('projet', 'title', 'projets'));
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *

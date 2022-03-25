@@ -33,6 +33,7 @@ class MessageController extends Controller
          $title = "ENVOYE UN MESSAGE";
          $users = User::get();
         $projets = Projet::get();
+        
         return view('message.create', compact('title', 'users', 'projets'));
     }
 
