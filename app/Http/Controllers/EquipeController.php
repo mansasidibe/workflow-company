@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EquipeController extends Controller
 {
@@ -36,7 +37,18 @@ class EquipeController extends Controller
         $equipes = Equipe::where('membre_id', Auth::user()->id);
         $projets = Projet::get();
         Carbon::setLocale('fr');
-        return view('chef-equipe.projet.index', compact('title', 'equipes', 'projets'));
+         $taches_tota = DB::table('taches')
+                 ->select('projet_id', DB::raw('count(*) as total'))
+                 ->groupBy('projet_id')
+                 ->get()
+                 ->count();
+
+        $taches = DB::table('taches')
+                 ->select('projet_id', DB::raw('count(*) as total'))
+                 ->groupBy('projet_id')
+                 ->where('etat', '=', 'termine')
+                 ->get();
+        return view('chef-equipe.projet.index', compact('title', 'equipes', 'projets', 'taches', 'taches_tota'));
     }
 
     public function tache(Projet $projets)

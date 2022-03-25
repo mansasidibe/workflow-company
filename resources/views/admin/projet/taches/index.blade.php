@@ -5,11 +5,18 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-        @include('admin.layout.sidebar')
+          @if (auth()->user()->type_utilisateur == "admin")
+             @include('admin.layout.sidebar')
+            <!-- top navigation -->
+            @include('admin.layout.navbar')
+            <!-- /top navigation -->
+          @elseif (auth()->user()->type_utilisateur == "chef")
+                @include('chef-equipe.layout.sidebar')
+                <!-- top navigation -->
+                @include('chef-equipe.layout.navbar')
+                <!-- /top navigation -->
+          @endif
 
-        <!-- top navigation -->
-        @include('admin.layout.navbar')
-        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -72,7 +79,7 @@
                                 </select>
                                 </div>
                             </div>
-                            
+
                             <br>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -163,14 +170,14 @@
                                             <option value="encours">en cours</option>
                                             <option value="termine">terminée</option>
                                         </select>
-                                        <td>      
+                                        <td>
                                             <button type="submit" class="btn btn-primary" data-toggle="modal">valider</button>
                                         </td>
                                     </form>
                                     </td>
                                 </tr>
                             @endforeach
-                                
+
                         @else
                             <tr>
                                 <td colspan="9" style="text-align: center;">Il n'ya pas encore de tâche {{ $projet->taches->count() }}</td>

@@ -144,7 +144,7 @@
                                     @if($value->projet_id == $projet->id && $taches_tota > 0)
                                         {{ ($projet->id * 100)/$taches_tota }}
                                     @endif
-                                @endforeach">
+                                @endforeach"> 
                               </div>
                             </div>
                             <small>

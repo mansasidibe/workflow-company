@@ -147,11 +147,24 @@
                           <td> {{ $projet->duree }} </td>
                           <td class="project_progress">
                             <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="0"></div>
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="
+                               @foreach ($taches as $key => $value)
+                                    @if($value->projet_id == $projet->id && $taches_tota > 0)
+                                        {{ ($projet->id * 100)/$taches_tota }}
+                                    @endif
+                                @endforeach">
+                              </div>
                             </div>
-                            <small>0% Completé</small>
+                            <small>
+
+                                @foreach ($taches as $key => $value)
+                                    @if($value->projet_id == $projet->id && $taches_tota > 0)
+                                        {{ ceil(($projet->id * 100)/$taches_tota)}}.
+                                    @endif
+                                @endforeach
+                                0% Completé</small>
                           </td>
-                          <td>
+                           <td>
                             @if ( $projet->etat == "encours")
                                 <button type="button" class="btn btn-warning btn-xs">En cours</button>
                             @elseif ( $projet->etat == "termine")
@@ -160,20 +173,9 @@
                                 <button type="button" class="btn btn-danger btn-xs">Début</button>
                             @endif
                           </td>
-                          @if(auth()->user()->type_utilisateur == "chef")
-                            <td>
+                          <td>
                             <a href="{{ route('projets.update', $projet->id ) }}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
-                            <a data-toggle="modal" data-target=".bs3-example-modal-lg" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edite </a>
-                            {{-- <a href="{{ route('projet.destroy', $projet->id ) }}" class="btn btn-danger btn-xs supress"><i class="fa fa-trash-o"></i> Archiver </a> --}}
                           </td>
-                          @else
-                            <td>
-                            <a href="{{ route('projets.update', $projet->id ) }}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
-                            {{-- <a data-toggle="modal" data-target=".bs3-example-modal-lg" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edite </a> --}}
-                            {{-- <a href="{{ route('projet.destroy', $projet->id ) }}" class="btn btn-danger btn-xs supress"><i class="fa fa-trash-o"></i> Archiver </a> --}}
-                          </td>
-                          @endif
-
                         </tr>
 
                         {{-- modal ici --}}
