@@ -22,16 +22,21 @@ class ProjetController extends Controller
         //
         $title = "TOUS LES PROJETS";
         $projets = Projet::get();
-        $taches_tota = Tache::get()->count();
         $equipes = Equipe::get();
         Carbon::setLocale('fr');
         $taches_debut = Tache::where('etat', 'debut')->count();
         $taches_total = Tache::count();
 
+        $taches_tota = DB::table('taches')
+                 ->select('projet_id', DB::raw('count(*) as total'))
+                 ->groupBy('projet_id')
+                 ->get()
+                 ->count();
+
         $taches = DB::table('taches')
                  ->select('projet_id', DB::raw('count(*) as total'))
                  ->groupBy('projet_id')
-                 ->where('etat', '!=', 'termine')
+                 ->where('etat', '=', 'termine')
                  ->get();
 
         return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total', 'taches_tota'));
