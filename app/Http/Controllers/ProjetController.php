@@ -107,9 +107,8 @@ class ProjetController extends Controller
     {
         //
         $title = "TACHES";
-        $projets = Projet::get();
 
-        return view('admin.projet.taches.index', compact('projet', 'title', 'projets'));
+        return view('admin.projet.taches.index', compact('projet', 'title'));
     }
 
     /**
@@ -153,12 +152,13 @@ class ProjetController extends Controller
         return redirect()->back()->with('message', 'Projet mis à jour avec succès!');
     }
 
-    public function tache_chef(Projet $projet)
+    public function tache_chef(Projet $projets)
     {
-        $title = "TACHES";
-        $projets = Projet::get();
+       $title = "TACHES";
 
-        return view('chef-equipe.projet.taches.index', compact('projet', 'title', 'projets'));
+        dd($projets);
+
+        return view('chef-equipe.projet.taches.index', compact('title', 'projets'));
     }
 
     /**
