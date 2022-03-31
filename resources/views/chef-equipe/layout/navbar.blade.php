@@ -28,29 +28,44 @@
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">1</span>
+                    <span class="badge bg-green">{{ $messages->count() }}</span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="{{ asset('images/img.jpg') }}" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">il y'a 3 mins</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>Voir toutes les alertes</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
+                       {{-- @if (Controller == DashboardController AND Method == dashbord_admin) --}}
+
+                        @if ($messages->count())
+                            @foreach ($messages as $message)
+                            <li>
+                                <a>
+                                    <span class="image"><img src="" alt="Profil Image" /></span>
+                                    <span>
+                                    <span style="color: green">{{ $message->sender }}</span>
+                                    <span class="time">{{ $message->created_at->diffForHumans() }}</span>
+                                    </span>
+                                    <span class="message">
+                                    {{ $message->message }}
+                                    </span>
+                                </a>
+                                </li>
+                            @endforeach
+
+                            <li>
+                            <div class="text-center">
+                                <a>
+                                <strong>Voir toutes les alertes</strong>
+                                <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                        @else
+                            <li>
+                                <div class="text-center">
+                                <a><strong>Il n'ya pas de message en cours</strong></a>
+                            </div>
+                            </li>
+                        @endif
+                    {{-- @endif --}}
+
                   </ul>
                 </li>
               </ul>
