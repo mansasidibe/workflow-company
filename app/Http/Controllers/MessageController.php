@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Models\Projet;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -19,7 +20,9 @@ class MessageController extends Controller
         //
         $title = "MESSAGES";
         $projets = Projet::get();
-        return view('message.index', compact('title', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('message.index', compact('title', 'projets', 'messages'));
     }
 
     /**
@@ -30,11 +33,12 @@ class MessageController extends Controller
     public function create()
     {
         //
-         $title = "ENVOYE UN MESSAGE";
-         $users = User::get();
+        $title = "ENVOYE UN MESSAGE";
+        $users = User::get();
         $projets = Projet::get();
-        
-        return view('message.create', compact('title', 'users', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('message.create', compact('title', 'users', 'projets', 'messages'));
     }
 
     /**
@@ -49,8 +53,15 @@ class MessageController extends Controller
         $donnee = $this->validate($request, [
             'destinataire_id' => '',
             'message' => '',
+            'sender' => '',
         ]);
-         dd($donnee);
+
+        if (Message::create($donnee)) {
+            return redirect()->back()->with('message', 'votre message est envoyé avec succès!');
+        } else {
+            return redirect()->back();
+        }
+
     }
 
     /**

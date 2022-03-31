@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
+use App\Models\Message;
 use App\Models\Projet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvenementController extends Controller
 {
@@ -17,7 +19,9 @@ class EvenementController extends Controller
     {
         $title = "CALENDRIER";
         $projets = Projet::get();
-        return view('calendrier.evenement', compact('title', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('calendrier.evenement', compact('title', 'projets', 'messages'));
     }
 
     /**

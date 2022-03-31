@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $users_homme = User::where('genre', 'H')->get();
         $users_femme = User::where('genre', 'F')->get();
         $equipes = Equipe::get();
-        $messages = Message::get();
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
         $date = Carbon::today()->subDays();
         $users_inscrit = User::where('created_at','>=',$date)->get();
         $projets = Projet::get();
@@ -35,7 +35,9 @@ class DashboardController extends Controller
         $users = User::get();
         $equipes = Equipe::get();
         $projets = Projet::get();
-        return view('chef-equipe.dashboard', compact('title', 'users','equipes', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('chef-equipe.dashboard', compact('title', 'users','equipes', 'projets', 'messages'));
     }
 
     public function dashbord_user()
@@ -44,11 +46,12 @@ class DashboardController extends Controller
         Carbon::setLocale('fr');
         $equipes = Equipe::get();
         $taches = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
-        $messages = Message::get();
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
         $projets = Projet::get();
         $taches_debut = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
         $taches_encours = Tache::where('etat', 'encours')->where('executand_id', Auth::user()->id)->get();
         $taches_termine = Tache::where('etat', 'termine')->where('executand_id', Auth::user()->id)->get();
+
         return view('user.dashboard', compact('title', 'projets', 'taches','equipes', 'messages', 'taches_debut', 'taches_encours', 'taches_termine'));
     }
 }

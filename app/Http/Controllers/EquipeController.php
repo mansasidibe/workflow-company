@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Message;
 use App\Models\Projet;
 use App\Models\Tache;
 use App\Models\User;
@@ -28,7 +29,8 @@ class EquipeController extends Controller
         $title = "LES CHEFS D'EQUIPE";
         $users = User::get();
         $projets = Projet::get();
-        return view('admin.personnel.chef-equipe', compact('title', 'users', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        return view('admin.personnel.chef-equipe', compact('title', 'users', 'projets', 'messages'));
     }
 
     public function projet()
@@ -37,6 +39,7 @@ class EquipeController extends Controller
         $equipes = Equipe::where('membre_id', Auth::user()->id);
         $projets = Projet::get();
         Carbon::setLocale('fr');
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
          $taches_tota = DB::table('taches')
                  ->select('projet_id', DB::raw('count(*) as total'))
                  ->groupBy('projet_id')
@@ -48,7 +51,7 @@ class EquipeController extends Controller
                  ->groupBy('projet_id')
                  ->where('etat', '=', 'termine')
                  ->get();
-        return view('chef-equipe.projet.index', compact('title', 'equipes', 'projets', 'taches', 'taches_tota'));
+        return view('chef-equipe.projet.index', compact('title', 'messages', 'equipes', 'projets', 'taches', 'taches_tota'));
     }
 
     public function tache(Projet $projets)
@@ -58,8 +61,9 @@ class EquipeController extends Controller
         Carbon::setLocale('fr');
         $equipes = Equipe::where('membre_id', Auth::user()->id);
         $taches = Tache::get();
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
-        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'taches'));
+        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'taches', 'messages'));
     }
 
     public function membre()
@@ -67,7 +71,8 @@ class EquipeController extends Controller
         $title = "TACHES";
         $equipes_chef = Equipe::get();
         $projets = Projet::get();
-        return view('chef-equipe.equipe.list', compact('title', 'equipes_chef', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        return view('chef-equipe.equipe.list', compact('title', 'equipes_chef', 'projets', 'messages'));
     }
 
     /**
@@ -82,7 +87,9 @@ class EquipeController extends Controller
         $users = User::get();
         $equipes = Equipe::get();
         $projets = Projet::get();
-        return view('admin.equipe.index', compact('title', 'users', 'equipes', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('admin.equipe.index', compact('title', 'users', 'equipes', 'projets', 'messages'));
 
     }
 

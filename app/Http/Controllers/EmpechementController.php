@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empechement;
+use App\Models\Message;
 use App\Models\Projet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmpechementController extends Controller
 {
@@ -17,11 +19,13 @@ class EmpechementController extends Controller
     public function index()
     {
         //
+        Carbon::setLocale('fr');
         $title = "TOUS LES EMPECHEMENTS";
         $empechements = Empechement::where('created_at', '>=', Carbon::now()->subDay())->latest()->get();
         $tous_empechement = Empechement::get();
         $projets = Projet::get();
-        return view('empechement.index', compact('title', 'empechements', 'tous_empechement', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        return view('empechement.index', compact('messages','title', 'empechements', 'tous_empechement', 'projets'));
     }
 
     /**
@@ -34,7 +38,9 @@ class EmpechementController extends Controller
         //
         $title = "DECLARER UN EMPECHEMENT";
         $projets = Projet::get();
-        return view('empechement.create', compact('title', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('empechement.create', compact('title', 'projets', 'messages'));
     }
 
     /**

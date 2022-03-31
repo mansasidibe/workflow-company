@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Message;
 use App\Models\Projet;
 use App\Models\Tache;
 use App\Models\User;
@@ -18,13 +19,14 @@ class TacheController extends Controller
      */
     public function index()
     {
-        //
         $title = "TOUS LES TACHES";
         $equipes = Equipe::get();
         $users = User::get();
         $projets = Projet::get();
         $taches = Tache::where('etat', 'debut')->where('executand_id', Auth::user()->id)->get();
-        return view('admin.projet.taches.index', compact('title', 'equipes', 'users', 'projets', 'taches'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('admin.projet.taches.index', compact('title', 'equipes', 'users', 'projets', 'taches', 'messages'));
     }
 
     /**
@@ -36,7 +38,9 @@ class TacheController extends Controller
     {
         //
         $title = "NOUVELLE TACHE";
-        return view('admin.projet.taches.create', compact('title'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('admin.projet.taches.create', compact('title', 'messages'));
     }
 
     /**
@@ -76,9 +80,10 @@ class TacheController extends Controller
      */
     public function show(Tache $tache)
     {
-        //
         $title = "DETAILS";
-        return view('admin.projet.show', compact($tache));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('admin.projet.show', compact('title', 'messages'));
     }
 
     /**

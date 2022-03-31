@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Message;
 use App\Models\Projet;
 use App\Models\Tache;
 use Carbon\Carbon;
@@ -26,6 +27,7 @@ class ProjetController extends Controller
         Carbon::setLocale('fr');
         $taches_debut = Tache::where('etat', 'debut')->count();
         $taches_total = Tache::count();
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
         $taches_tota = DB::table('taches')
                  ->select('projet_id', DB::raw('count(*) as total'))
@@ -39,7 +41,7 @@ class ProjetController extends Controller
                  ->where('etat', '=', 'termine')
                  ->get();
 
-        return view('admin.projet.index', compact('title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total', 'taches_tota'));
+        return view('admin.projet.index', compact('messages','title', 'projets', 'taches', 'equipes', 'taches_debut', 'taches_total', 'taches_tota'));
     }
 
     public function id(Request $request, Tache $projet)
@@ -64,7 +66,9 @@ class ProjetController extends Controller
         //
         $title = "CREATION PROJETS";
         $projets = Projet::get();
-        return view('admin.projet.create', compact('title', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+
+        return view('admin.projet.create', compact('title', 'projets', 'messages'));
     }
 
     /**
@@ -107,8 +111,9 @@ class ProjetController extends Controller
     {
         //
         $title = "TACHES";
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
-        return view('admin.projet.taches.index', compact('projet', 'title'));
+        return view('admin.projet.taches.index', compact('projet', 'title', 'messages'));
     }
 
     /**
@@ -155,10 +160,11 @@ class ProjetController extends Controller
     public function tache_chef(Projet $projets)
     {
        $title = "TACHES";
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
-        dd($projets);
+        dd($projets->taches);
 
-        return view('chef-equipe.projet.taches.index', compact('title', 'projets'));
+        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'messages'));
     }
 
     /**
