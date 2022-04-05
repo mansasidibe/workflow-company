@@ -111,9 +111,10 @@ class ProjetController extends Controller
     {
         //
         $title = "TACHES";
+        $projets = Projet::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
-        return view('admin.projet.taches.index', compact('projet', 'title', 'messages'));
+        return view('admin.projet.taches.index', compact('projet', 'title', 'messages', 'projets'));
     }
 
     /**
@@ -162,7 +163,7 @@ class ProjetController extends Controller
        $title = "TACHES";
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
-        dd($projets->taches);
+        // dd($projets->taches);
 
         return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'messages'));
     }

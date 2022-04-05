@@ -44,7 +44,7 @@ Route::post('/parametre', [AuthController::class, 'storeParametre'])->name('user
 
 
 Route::resource('/projets', ProjetController::class);
-Route::get('chef/projet/tache/{projets}', [ProjetController::class, 'tache_chef'])->name('projets.update.chef');
+Route::get('/projet/taches/{projets}', [ProjetController::class, 'tache_chef'])->name('projets.update.chef');
 Route::get('/projet/tache/{projets}', [ProjetController::class, 'tache'])->name('projet.tache');
 Route::put('/projet/tache/{projet}', [ProjetController::class, 'id'])->name('equipe.id');
 

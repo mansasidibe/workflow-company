@@ -144,7 +144,7 @@
                                     @if($value->projet_id == $projet->id && $taches_tota > 0)
                                         {{ ($projet->id * 100)/$taches_tota }}
                                     @endif
-                                @endforeach"> 
+                                @endforeach">
                               </div>
                             </div>
                             <small>
@@ -281,18 +281,21 @@
 
   <script>
       $(document).ready(function(){
+          // SCRIPT DE CONFIGURATION DE REQUETE
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
+            // LANCONS DE LA REQUETE
           $('.supress').click(function (e) {
             e.preventDefault();
 
+            // INITIALISONS LA CIBLE
             var element_id = $(this).closest('tr').find('.btn-suppres').val();
-
+                // DEBUTONS DES OPERATION
                 swal({
+                    // CODE PRIS SUR LA DOCUMENTATION DE SWEETALERT
                     title: "Etes-vous sûr d'effectuer cette opération ?",
                     text: "Cette action est irréversible!",
                     icon: "warning",
@@ -302,11 +305,13 @@
                 .then((willDelete) => {
                     if (willDelete) {
 
+                        // ECHAPONS L'ERREUR 419 CSRF DE LARAVEL
                         var data = {
                             "_token": $('input[name="_token"]').val(),
                             "id": element_id,
                         };
 
+                        // FONCTION AJAX
                         $.ajax({
                             type: "DELETE",
                             url: '/projets/'+element_id,
@@ -315,6 +320,7 @@
                                 swal(response.message, {
                                     icon: "success",
                                 })
+                                // SI TOUT EST OK, RECHARGEONS LA PAGE
                                 .then((result) => {
                                     location.reload();
                                 });
