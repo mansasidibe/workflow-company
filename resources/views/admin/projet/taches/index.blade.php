@@ -10,7 +10,7 @@
             <!-- top navigation -->
             @include('admin.layout.navbar')
             <!-- /top navigation -->
-          @elseif (auth()->user()->type_utilisateur == "chef")
+          @else 
                 @include('chef-equipe.layout.sidebar')
                 <!-- top navigation -->
                 @include('chef-equipe.layout.navbar')
@@ -27,13 +27,25 @@
                 <h3>Projets</h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Nouvelles tâches</button>
-                  </div>
-                </div>
-              </div>
+              @if (auth()->user()->type_utilisateur == "admin" || auth()->user()->type_utilisateur == "chef")
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Nouvelles tâches</button>
+                        </div>
+                        </div>
+                    </div>
+              @else
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <p>Bienvenue, {{ auth()->user()->nom_utilisateur }}</p>
+                        </div>
+                        </div>
+                    </div>
+              @endif
+
+
             </div>
 
             {{-- modal ici --}}
