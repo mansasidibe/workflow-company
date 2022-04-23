@@ -10,7 +10,7 @@
             <!-- top navigation -->
             @include('admin.layout.navbar')
             <!-- /top navigation -->
-          @else 
+          @else
                 @include('chef-equipe.layout.sidebar')
                 <!-- top navigation -->
                 @include('chef-equipe.layout.navbar')
@@ -24,7 +24,7 @@
 
             <div class="page-title">
               <div class="title_left">
-                <h3>Projets</h3>
+                <h3>Projets: {{ $projet->nom }}</h3>
               </div>
 
               @if (auth()->user()->type_utilisateur == "admin" || auth()->user()->type_utilisateur == "chef")
@@ -205,9 +205,107 @@
                 </div>
               </div>
             </div>
+
+            {{--  --}}
+
+            @if (auth()->user()->type_utilisateur == "admin")
+                <div class="clearfix"></div>
+
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Les taches terminées</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">Libellé </th>
+                            <th class="column-title">Durée </th>
+                            <th class="column-title">Exécutant </th>
+                            <th class="column-title">Temps d'ajout </th>
+                            <th class="column-title">Status </th>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                        @if ($projet->taches->count())
+                            @foreach ($projet->taches as $key => $object)
+                                <tr class="even pointer">
+                                    <td class="a-center ">
+                                    <input type="checkbox" class="flat" name="table_records">
+                                    </td>
+                                    <td class=" "> {{ $object->libelle }}</td>
+                                    <td class=" ">{{ $object->duree }}</td>
+                                    <td class=" ">{{ $object->executand_nom }}</td>
+                                    <td class=" "> {{ $object->created_at->diffForHumans() }}</td>
+                                    <td class=" ">
+                                        @if ($object->etat === "encours")
+                                            <button type="button" class="btn btn-warning btn-xs">En cours</button>
+                                        @elseif ( $object->etat === "termine")
+                                            <button type="button" class="btn btn-success btn-xs">Terminé</button>
+                                        @else
+                                            <button type="button" class="btn btn-danger btn-xs">Début</button>
+                                        @endif
+                                    </td>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        @else
+                            <tr>
+                                <td colspan="9" style="text-align: center;">Il n'ya pas encore de tâche {{ $projet->taches->count() }}</td>
+                            </tr>
+                        @endif
+
+                        </tbody>
+                      </table>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
+
+            {{-- FIN TOUTES LES TACHES --}}
+
           </div>
+
         </div>
         <!-- /page content -->
+
+
 
         <!-- footer content -->
        @include('admin.layout.footer')

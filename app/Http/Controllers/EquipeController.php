@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Membre;
 use App\Models\Message;
 use App\Models\Projet;
 use App\Models\Tache;
@@ -29,6 +30,7 @@ class EquipeController extends Controller
         $title = "LES CHEFS D'EQUIPE";
         $users = User::get();
         $projets = Projet::get();
+
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
         return view('admin.personnel.chef-equipe', compact('title', 'users', 'projets', 'messages'));
     }
@@ -36,6 +38,8 @@ class EquipeController extends Controller
     public function projet()
     {
         $title = "PROJETS";
+        // $membre = Equipe::where("membre_id",Auth::user()->id)->get();
+        // dd($membre);
         $equipes = Equipe::where('membre_id', Auth::user()->id);
         $projets = Projet::get();
         Carbon::setLocale('fr');
@@ -51,6 +55,8 @@ class EquipeController extends Controller
                  ->groupBy('projet_id')
                  ->where('etat', '=', 'termine')
                  ->get();
+
+
         return view('chef-equipe.projet.index', compact('title', 'messages', 'equipes', 'projets', 'taches', 'taches_tota'));
     }
 
