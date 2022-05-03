@@ -11,13 +11,14 @@ class Equipe extends Model
 
     protected $guarded= [];
 
+    public function projets()
+    {
+        return $this->hasMany(Projet::class);
+    }
+
     public function membres()
     {
         return $this->hasMany(Membre::class);
     }
 
-    public function projets()
-    {
-        return $this->hasMany(Projet::class);
-    }
 }

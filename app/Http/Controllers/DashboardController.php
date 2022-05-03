@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Equipe;
+use App\Models\Membre;
 use App\Models\Message;
 use App\Models\Projet;
 use App\Models\Tache;
@@ -16,6 +17,9 @@ class DashboardController extends Controller
 
     public function dashbord_admin()
     {
+
+        // dd(Equipe::get()->pr);
+
         $title = "DASHBOARD ADMINISTRATEUR";
         $users = User::get();
         $users_homme = User::where('genre', 'H')->get();

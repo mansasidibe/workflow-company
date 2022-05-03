@@ -21,4 +21,9 @@ class Projet extends Model
     {
         return $this->hasMany(Tache::class);
     }
+
+    public function membre()
+    {
+        return $this->hasManyThrough(Equipe::class, membre::class);
+    }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nom');
             $table->integer('user_id');
             $table->unsignedBigInteger('equipe_id')->index();
+            // $table->unsignedBigInteger('equipe_id')->index();
             $table->timestamps();
         });
     }
