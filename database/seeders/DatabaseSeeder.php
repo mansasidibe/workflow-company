@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Equipe;
 use App\Models\Projet;
+use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,7 +21,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         Equipe::factory(50)->create();
         User::factory(20)->create();
-        Projet::factory(20)->create();
+        Projet::factory(50)->create();
+        Tache::factory(100)->create();
 
     }
 }
