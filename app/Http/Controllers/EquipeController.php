@@ -40,7 +40,7 @@ class EquipeController extends Controller
         $title = "PROJETS";
         // $membre = Equipe::where("membre_id",Auth::user()->id)->get();
         // dd($membre);
-        $equipes = Equipe::where('membre_id', Auth::user()->id)->get();
+        $equipes = Equipe::get();
         // dd($equipes);
         // Auth::user()->id a été ajouté
         $projets = Projet::where('equipe_id', Auth::user()->id)->get();
