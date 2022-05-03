@@ -9,14 +9,8 @@ class Projet extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
-        'nom',
-        'date_debut',
-        'duree',
-        'equipe_id',
-        'etat',
-        'tache_id',
-    ];
+    protected $guarded= [];
+
 
     public function equipe()
     {

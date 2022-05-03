@@ -9,10 +9,8 @@ class Membre extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nom',
-        'equipe_id'
-    ];
+    protected $guarded= [];
+
 
     public function equipe()
     {

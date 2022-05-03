@@ -9,12 +9,7 @@ class Empechement extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'titre',
-        'file',
-        'raison',
-        'user_id',
-    ];
+    protected $guarded= [];
 
     public function user()
     {

@@ -9,12 +9,7 @@ class Equipe extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nom',
-        'chef',
-        'projet_id',
-        'membre_id',
-    ];
+    protected $guarded= [];
 
     public function membres()
     {

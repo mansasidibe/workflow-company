@@ -9,15 +9,8 @@ class Tache extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
-       'libelle',
-       'duree',
-       'etat',
-       'projet_id',
-       'executand_id',
-       'equipe_id',
-       'executand_nom',
-    ];
+    protected $guarded= [];
+
 
     public function membre()
     {
