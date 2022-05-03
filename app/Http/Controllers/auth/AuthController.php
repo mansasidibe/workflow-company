@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\Projet;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class AuthController extends Controller
         $user = Auth::user();
         $title = "PROFIL : $user->nom_utilisateur";
         $projets = Projet::get();
-        return view('auth.profile', compact('user', 'title', 'projets'));
+        $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        return view('auth.profile', compact('user', 'title', 'projets', 'messages'));
     }
 
     public function update_profil(User $user, Request $request)
