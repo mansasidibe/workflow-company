@@ -113,6 +113,7 @@ class ProjetController extends Controller
         $title = "TACHES";
         $projets = Projet::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        // dd($projets->equipe);
 
         return view('admin.projet.taches.index', compact('projet', 'title', 'messages', 'projets'));
     }

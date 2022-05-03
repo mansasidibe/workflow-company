@@ -75,22 +75,18 @@
 
                   @if ($taches->count())
                     @foreach ($taches as $tache)
-                            @foreach ($projets as $projet)
-                                 <div class="x_content">
-                                <article class="media event">
-                                    <a class="pull-left date">
-                                        <p class="month">{{ $tache->created_at->format('F') }}</p>
-                                        <p class="day">{{ $tache->created_at->format('d') }}</p>
-                                    </a>
-                                    <div class="media-body">
-                                        <a class="title" >Projet : @if($tache->projet_id == $projet->id)
-                                            {{ $projet->nom }}</a>
-                                        @endif
-                                        <p>Tache: {{ $tache->libelle }}</p>
-                                    </div>
-                                </article>
+                    <div class="x_content">
+                        <article class="media event">
+                            <a class="pull-left date">
+                                <p class="month">{{ $tache->created_at->format('F') }}</p>
+                                <p class="day">{{ $tache->created_at->format('d') }}</p>
+                            </a>
+                            <div class="media-body">
+                                <a class="title" >Projet : {{ $tache->projet->nom }}</a>
+                                <p>Tache: {{ $tache->libelle }}</p>
                             </div>
-                            @endforeach
+                        </article>
+                    </div>
                     @endforeach
                    @else
                         <div class="x_content">
