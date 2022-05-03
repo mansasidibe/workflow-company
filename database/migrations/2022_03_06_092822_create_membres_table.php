@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->integer('user_id');
+            // $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('equipe_id')->index();
             // $table->unsignedBigInteger('equipe_id')->index();
             $table->timestamps();

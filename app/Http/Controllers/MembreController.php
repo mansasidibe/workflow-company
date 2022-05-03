@@ -38,14 +38,15 @@ class MembreController extends Controller
         //
         $donnee = $this->validate($request, [
             'nom' => '',
-            'equipe_id' => ''
+            'equipe_id' => '',
+            'user_id' => '',
         ]);
 
         // dd($donnee);
 
         Membre::create($donnee);
 
-        return redirect()->back()->with('message', 'le memebre à bien été ajouté');
+        return redirect()->back()->with('message', 'le membre à bien été ajouté');
     }
 
     /**

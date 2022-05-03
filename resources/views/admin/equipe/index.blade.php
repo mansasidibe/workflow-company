@@ -50,7 +50,6 @@
                                 @if ($users->count())
                                     @foreach ($users as $user)
                                         <option value="{{ $user->nom_prenom }}">{{ $user->nom_prenom }}</option>
-                                        <input type="hidden" value="{{ $user->id }}" name="membre_id">
                                     @endforeach
                                 @else
                                     <option>Pas d'utilisateur</option>

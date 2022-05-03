@@ -118,7 +118,7 @@ class EquipeController extends Controller
         Equipe::create([
             'nom' => $request->nom,
             'chef' => $request->chef,
-            'membre_id' => $request->membre_id,
+            // 'membre_id' => $request->membre_id,
         ]);
 
         return redirect()->back()->with('message', 'Equipe ajoutée avec succès');
