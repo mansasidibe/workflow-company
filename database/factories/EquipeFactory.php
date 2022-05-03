@@ -18,8 +18,8 @@ class EquipeFactory extends Factory
     {
         return [
             //
-            'nom' => $this->faker->name(),
-            'chef' => $this->faker->name(),
+            'nom' => $this->faker->word(),
+            'chef' => $this->faker->randomElement(['Sira Sidibé', 'Arouna Sidick', 'Sidick', 'Yann Kouamé', 'Chérif Ben Ali']),
             // 'user_id' => $this->faker->numberBetween(1,20),
         ];
     }
