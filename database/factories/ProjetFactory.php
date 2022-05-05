@@ -17,10 +17,10 @@ class ProjetFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->word(),
-            'date_debut' => $this->faker->randomElement(['12/2/2022', '2/1/2012']),
+            'nom' => $this->faker->randomElement(['RH SYSTEM', 'CORVALES', 'BOUDAPP', 'KORHA', 'BATI-CHECK']),
+            'date_debut' => $this->faker->randomElement(['12/2/2022', '2/1/2012', '04/03/2021']),
             'duree' => $this->faker->randomElement(['12 mois', '2 mois', '6 semaines']),
-            'equipe_id' => $this->faker->numberBetween(1,50)
+            'equipe_id' => $this->faker->numberBetween(1,5)
         ];
     }
 }
