@@ -37,7 +37,7 @@
                           <ul class="nav child_menu">
                             @foreach ($taches as $projet)
                             {{-- changer la route --}}
-                                <li><a href="{{ route('projets.update', $projet->id ) }}">{{ $projet->projet->nom }}</a></li>
+                                <li><a href="{{ route('equipe.tache', $projet->id ) }}">{{ $projet->projet->nom }}</a></li>
                             @endforeach
                           </ul>
                         </li>

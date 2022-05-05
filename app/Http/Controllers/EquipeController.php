@@ -30,7 +30,7 @@ class EquipeController extends Controller
         $title = "LES CHEFS D'EQUIPE";
         $users = User::get();
         $projets = Projet::get();
-
+        $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
         return view('admin.personnel.chef-equipe', compact('title', 'users', 'projets', 'messages'));
     }
@@ -70,10 +70,10 @@ class EquipeController extends Controller
         $title = "TACHES";
         Carbon::setLocale('fr');
         $equipes = Equipe::where('membre_id', Auth::user()->id);
-        $taches = Tache::get();
+        // $taches = Tache::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
 
-        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'taches', 'messages'));
+        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'messages'));
     }
 
     public function membre()

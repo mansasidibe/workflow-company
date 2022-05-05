@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empechement;
 use App\Models\Message;
 use App\Models\Projet;
+use App\Models\Tache;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,8 +40,9 @@ class EmpechementController extends Controller
         $title = "DECLARER UN EMPECHEMENT";
         $projets = Projet::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
 
-        return view('empechement.create', compact('title', 'projets', 'messages'));
+        return view('empechement.create', compact('taches','title', 'projets', 'messages'));
     }
 
     /**

@@ -25,10 +25,9 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-            @if (auth()->user()->type_utilisateur == "chef")
+            @if (auth()->user()->type_utilisateur == "chef" )
                 @include('chef-equipe.layout.sidebar')
                 @include('chef-equipe.layout.navbar')
-
             @endif
 
         <!-- page content -->
@@ -155,8 +154,8 @@
                         </thead>
 
                         <tbody>
-                         @if ($projet->taches->count())
-                            @foreach ($projet->taches as $key => $object)
+                         @if ($projets->taches->count())
+                            @foreach ($projets->taches as $key => $object)
                                 <tr class="even pointer">
                                     <td class="a-center ">
                                     <input type="checkbox" class="flat" name="table_records">

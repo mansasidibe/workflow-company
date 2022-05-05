@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use App\Models\Message;
 use App\Models\Projet;
+use App\Models\Tache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +21,9 @@ class EvenementController extends Controller
         $title = "CALENDRIER";
         $projets = Projet::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
 
-        return view('calendrier.evenement', compact('title', 'projets', 'messages'));
+        return view('calendrier.evenement', compact('taches','title', 'projets', 'messages'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Models\Projet;
+use App\Models\Tache;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +38,9 @@ class MessageController extends Controller
         $users = User::get();
         $projets = Projet::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
 
-        return view('message.create', compact('title', 'users', 'projets', 'messages'));
+        return view('message.create', compact('taches','title', 'users', 'projets', 'messages'));
     }
 
     /**
