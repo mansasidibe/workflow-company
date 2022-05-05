@@ -43,7 +43,7 @@ class EquipeController extends Controller
         $equipes = Equipe::get();
         // dd($equipes);
         // Auth::user()->id a été ajouté
-        $projets = Projet::where('equipe_id', Auth::user()->id)->get();
+        $projets = Projet::get();
         Carbon::setLocale('fr');
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
          $taches_tota = DB::table('taches')
@@ -52,11 +52,13 @@ class EquipeController extends Controller
                  ->get()
                  ->count();
 
-        $taches = DB::table('taches')
-                 ->select('projet_id', DB::raw('count(*) as total'))
-                 ->groupBy('projet_id')
-                 ->where('etat', '=', 'termine')
-                 ->get();
+        // $taches = DB::table('taches')
+        //          ->select('projet_id', DB::raw('count(*) as total'))
+        //          ->groupBy('projet_id')
+        //          ->where('etat', '=!', 'termine')
+        //          ->get();
+
+        $taches = Tache::where('membre_id', Auth::user()->id)->get();
 
 
         return view('chef-equipe.projet.index', compact('title', 'messages', 'equipes', 'projets', 'taches', 'taches_tota'));
