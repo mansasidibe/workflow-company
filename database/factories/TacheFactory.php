@@ -22,7 +22,6 @@ class TacheFactory extends Factory
             'duree' => $this->faker->randomElement(['2 heures', '6 mois']),
             'projet_id' => $this->faker->numberBetween(1,5),
             'membre_id' => $this->faker->numberBetween(1,5),
-            'executand_nom' => $this->faker->randomElement(['Sira Sidibé', 'Arouna Sidick', 'Sidick', 'Yann Kouamé', 'Chérif Ben Ali']),
         ];
     }
 }

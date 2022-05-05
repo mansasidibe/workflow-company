@@ -79,10 +79,9 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Exécutant</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                 <select name="executand_id" class="form-control">
-                                    @if ($projet->equipe->count())
-                                        @foreach ($projet->equipe as $equipe)
-                                            {{-- <option value="{{ $equipe->id }}">{{ $equipe->nom }}</option> --}}
-                                            {{-- <input type="hidden" value="{{ $equipe->nom }}" name="executand_nom"> --}}
+                                    @if ($projet->equipe->membres->count())
+                                        @foreach ($projet->equipe->membres as $membres)
+                                            <option value="{{ $membres->id }}">{{ $membres->nom }}</option>
                                         @endforeach
                                         <input type="hidden" value="{{ $projet->id }}" name="projet_id">
                                     @else
@@ -162,7 +161,7 @@
                                     </td>
                                     <td class=" "> {{ $object->libelle }}</td>
                                     <td class=" ">{{ $object->duree }}</td>
-                                    <td class=" ">{{ $object->executand_nom }}</td>
+                                    <td class=" ">{{ $object->membre->nom }}</td>
                                     <td class=" "> {{ $object->created_at->diffForHumans() }}</td>
                                     <td class=" ">
                                         @if ($object->etat === "encours")
