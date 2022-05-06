@@ -2494,7 +2494,7 @@ if (typeof NProgress != 'undefined') {
 					end: new Date(y, m, d + 1, 22, 30),
 					allDay: false
 				  }, {
-					title: 'Click for Google',
+					title: 'Cliquer Google',
 					start: new Date(y, m, 28),
 					end: new Date(y, m, 29),
 					url: 'http://google.com/'
