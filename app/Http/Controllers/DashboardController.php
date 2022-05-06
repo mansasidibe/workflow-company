@@ -40,8 +40,9 @@ class DashboardController extends Controller
         $equipes = Equipe::get();
         $projets = Projet::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
 
-        return view('chef-equipe.dashboard', compact('title', 'users','equipes', 'projets', 'messages'));
+        return view('chef-equipe.dashboard', compact('title', 'users','equipes', 'projets', 'messages', 'taches'));
     }
 
     public function dashbord_user()

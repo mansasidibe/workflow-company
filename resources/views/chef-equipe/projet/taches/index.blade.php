@@ -25,7 +25,7 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-            @if (auth()->user()->type_utilisateur == "chef" )
+            @if (auth()->user()->type_utilisateur == "chef" || auth()->user()->type_utilisateur == "employe")
                 @include('chef-equipe.layout.sidebar')
                 @include('chef-equipe.layout.navbar')
             @endif

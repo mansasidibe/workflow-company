@@ -72,8 +72,9 @@ class EquipeController extends Controller
         $equipes = Equipe::where('membre_id', Auth::user()->id);
         // $taches = Tache::get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
+        $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
 
-        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'messages'));
+        return view('chef-equipe.projet.taches.index', compact('title', 'projets', 'equipes', 'messages', 'taches'));
     }
 
     public function membre()

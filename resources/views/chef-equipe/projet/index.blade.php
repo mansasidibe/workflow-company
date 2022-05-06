@@ -174,7 +174,7 @@
                             @endif
                           </td>
                           <td>
-                            <a href="{{ route('projets.update', $projet->id ) }}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
+                            <a href="{{ route('equipe.tache', $projet->id ) }}"  class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> Voir </a>
                           </td>
                         </tr>
 
