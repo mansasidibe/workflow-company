@@ -40,8 +40,8 @@ class EquipeController extends Controller
         $title = "PROJETS";
         // $membre = Equipe::where("membre_id",Auth::user()->id)->get();
         // dd($membre);
-        $equipes = Equipe::get();
-        // dd($equipes);
+        $equipes = Equipe::where('chef', Auth::user()->nom_prenom)->get();
+        // dd($equipes->projets);
         // Auth::user()->id a été ajouté
         $projets = Projet::get();
         Carbon::setLocale('fr');

@@ -20,7 +20,7 @@
                 <div class="dashboard_graph x_panel">
                   <div class="row x_title">
                     <div class="col-md-6">
-                      <h3>Evolution des activités <small>Equipe Back-end</small></h3>
+                      <h2>Evolution des activités de <span> {{ $equipes->nom }} : {{ $equipes->membres->count() }} membres</span></h2>
                     </div>
                     <div class="col-md-6">
                       <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
