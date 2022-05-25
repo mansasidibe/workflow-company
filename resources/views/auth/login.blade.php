@@ -56,7 +56,7 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> World Market Commodities!</h1>
+                  <h1>World Market Commodities!</h1>
                   <p>©{{ date('Y') }} - Tous droits réservés | World Market Commodities!</p>
                 </div>
               </div>

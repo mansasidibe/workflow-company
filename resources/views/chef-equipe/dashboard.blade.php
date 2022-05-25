@@ -20,18 +20,20 @@
                 <div class="dashboard_graph x_panel">
                   <div class="row x_title">
                     <div class="col-md-6">
-                      <h2>Evolution des activités de <span> {{ $equipes->nom }} : {{ $equipes->membres->count() }} membres</span></h2>
+                      {{-- <h2>Evolution des activités de <span> {{ $equipes->nom }} : {{ $equipes->membres->count() }} membres</span></h2> --}}
                     </div>
                     <div class="col-md-6">
                       <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                       {{-- <b class="caret"></b> --}}
                       </div>
                     </div>
                   </div>
                   <div class="x_content">
-                    <div class="demo-container" style="height:250px">
-                      <div id="chart_plot_03" class="demo-placeholder"></div>
+                    <div class="demo-container" style="height:500px">
+                    {{-- METTRE LE CHART ICI --}}
+                      {{-- <div id="chart_plot_03" class="demo-placeholder"></div> --}}
+                      <canvas id="myChart" width="100" height="40"></canvas>
                     </div>
                   </div>
                 </div>
@@ -587,6 +589,63 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
+    {{-- CHART JS --}}
+    {{-- <script>
+        $(function(){
+            var datas = <?php echo json_encode($datas); ?>;
+            var barCanvas = $("#barChart");
+            var barChart = new Chart(barCanvas, {
+                type: 'bar',
+                datas:{
+                    labels:['Jan', 'Fev'],
+                    datasets:[{
+                        label: 'Evolution',
+                        data: datas,
+                        backgroundColor:['red', 'green']
+                    }]
+                },
+                options:{
+                    scales:{
+                        yAxes:[{
+                            ticks:{
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+        })
+    </script> --}}
+
+    <script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+        datasets: [{
+            label: 'Evolution de l\'équipe Dev-Back',
+            data: [22, 19, 3, 5, 2, 0, 0],
+            backgroundColor: [
+                'rgba(42,63,84,0.2)',
+            ],
+            borderColor: [
+                'rgba(42,63,84,1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
 
   </body>
 
