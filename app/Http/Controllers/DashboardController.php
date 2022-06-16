@@ -57,7 +57,7 @@ class DashboardController extends Controller
         $taches_debut = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
         $taches_encours = Tache::where('etat', 'encours')->where('membre_id', Auth::user()->id)->get();
         $taches_termine = Tache::where('etat', 'termine')->where('membre_id', Auth::user()->id)->get();
-
+        
         return view('user.dashboard', compact('title', 'projets', 'taches','equipes', 'messages', 'taches_debut', 'taches_encours', 'taches_termine'));
     }
 }
