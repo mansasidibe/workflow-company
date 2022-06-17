@@ -81,7 +81,7 @@
                                 <select name="executand_id" class="form-control">
                                     @if ($projet->equipe->membres->count())
                                         @foreach ($projet->equipe->membres as $membres)
-                                            <option value="{{ $membres->id }}">{{ $membres->nom }}</option>
+                                            <option value="{{ $membres->nom }}">{{ $membres->nom }}</option>
                                         @endforeach
                                         <input type="hidden" value="{{ $projet->id }}" name="projet_id">
                                     @else

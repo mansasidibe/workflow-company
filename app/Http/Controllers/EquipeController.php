@@ -117,7 +117,7 @@ class EquipeController extends Controller
             'nom' => 'required|string',
             'chef' => 'required|string',
         ]);
-
+        
         Equipe::create([
             'nom' => $request->nom,
             'chef' => $request->chef,

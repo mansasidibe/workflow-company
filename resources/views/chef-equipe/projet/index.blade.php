@@ -131,20 +131,20 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @if ($taches->count())
-                            @foreach ($taches as $projet)
+                        @if ($projets->count())
+                            @foreach ($projets as $projet)
 
                         <tr>
                             <input type="hidden" class="btn-suppres" value="{{ $projet->id }}">
                           <td>{{ $projet->id }}</td>
                           <td>
-                            <a>{{ $projet->projet->nom }}</a>
+                            <a>{{ $projet->nom }}</a>
                             <br />
-                            <small>Créé le {{ $projet->projet->created_at }}</small>
+                            <small>Créé le {{ $projet->created_at }}</small>
                             <br />
-                            <small>Modifié : {{ $projet->projet->updated_at->diffForHumans() }} par : admin </small>
+                            <small>Modifié : {{ $projet->updated_at->diffForHumans() }} par : admin </small>
                           </td>
-                          <td> {{ $projet->projet->duree }} </td>
+                          <td> {{ $projet->duree }} </td>
                           <td class="project_progress">
                             <div class="progress progress_sm">
                               <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="

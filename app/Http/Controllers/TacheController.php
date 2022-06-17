@@ -59,11 +59,13 @@ class TacheController extends Controller
             'projet_id' => '',
         ]);
         // dd($request->executand_id);
+        $users = User::where('nom_prenom', $request->executand_id)->first();
+        // dd($users->id);
 
         Tache::create([
             'libelle' => $request->libelle,
             'duree' => $request->duree,
-            'membre_id' => $request->executand_id,
+            'membre_id' => $users->id,
             'projet_id' => $request->projet_id,
         ]);
 

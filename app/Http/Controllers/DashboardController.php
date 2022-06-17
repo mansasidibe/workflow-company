@@ -50,6 +50,7 @@ class DashboardController extends Controller
     {
         $title = "DASHBOARD EMPLOYE";
         Carbon::setLocale('fr');
+        $users = User::get();
         $equipes = Equipe::get();
         $taches = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
         $messages = Message::where('destinataire_id', Auth::user()->id)->get();
@@ -57,7 +58,7 @@ class DashboardController extends Controller
         $taches_debut = Tache::where('etat', 'debut')->where('membre_id', Auth::user()->id)->get();
         $taches_encours = Tache::where('etat', 'encours')->where('membre_id', Auth::user()->id)->get();
         $taches_termine = Tache::where('etat', 'termine')->where('membre_id', Auth::user()->id)->get();
-        
-        return view('user.dashboard', compact('title', 'projets', 'taches','equipes', 'messages', 'taches_debut', 'taches_encours', 'taches_termine'));
+
+        return view('user.dashboard', compact('users','title', 'projets', 'taches','equipes', 'messages', 'taches_debut', 'taches_encours', 'taches_termine'));
     }
 }
