@@ -161,7 +161,7 @@
                                     </td>
                                     <td class=" "> {{ $object->libelle }}</td>
                                     <td class=" ">{{ $object->duree }}</td>
-                                    <td class=" ">{{ $object->membre->nom }}</td>
+                                    {{-- <td class=" ">{{ $object->membre->id }}</td> --}}
                                     <td class=" "> {{ $object->created_at->diffForHumans() }}</td>
                                     <td class=" ">
                                         @if ($object->etat === "encours")
