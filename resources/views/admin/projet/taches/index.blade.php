@@ -31,7 +31,7 @@
                     <div class="title_right">
                         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div class="input-group">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Nouvelles tâches</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Nouvelle tâche</button>
                         </div>
                         </div>
                     </div>
@@ -209,7 +209,6 @@
 
             @if (auth()->user()->type_utilisateur == "admin")
                 <div class="clearfix"></div>
-
             <div class="row">
 
               <div class="col-md-12 col-sm-12 col-xs-12">
